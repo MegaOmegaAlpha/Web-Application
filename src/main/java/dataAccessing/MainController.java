@@ -24,10 +24,29 @@ public class MainController {
         return "db";
     }
 
-    @PostMapping
+    @PostMapping()
     public String add(@RequestParam String userName, @RequestParam String userPass, Model model) {
         userRepository.save(new User(userName, userPass));
         model.addAttribute("users", userRepository.findAll());
         return "db";
+    }
+
+    @PostMapping("find")
+    public String find(@RequestParam String idToFind, Model model) {
+        if (idToFind != null && isDigital(idToFind)) {
+            model.addAttribute("users", userRepository.findUserById(Integer.parseInt(idToFind)));
+        } else {
+            model.addAttribute("users", userRepository.findAll());
+        }
+        return "db";
+    }
+
+    private boolean isDigital(String number) {
+        try {
+            Integer.parseInt(number);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

@@ -6,11 +6,21 @@
 </head>
 <body>
     <main>
-        <form method="post">
-            <input type="text" name="userName" placeholder="Name"/>
-            <input type="text" name="userPass" placeholder="Password"/>
-            <button type="submit">Add</button>
-        </form>
+        <div>
+            <p>Add new user</p>
+            <form method="post">
+                <input type="text" name="userName" placeholder="Name"/>
+                <input type="text" name="userPass" placeholder="Password"/>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div>
+            <p>Find user by his ID</p>
+            <form method="post" action="/demo/find">
+                <input type="text" name="idToFind" placeholder="ID"/>
+                <button type="submit">Find</button>
+            </form>
+        </div>
         <table border="1">
             <tr>
                 <th>ID</th>
