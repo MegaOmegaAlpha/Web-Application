@@ -2,28 +2,32 @@ package dataAccessing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "demon")
+@RequestMapping(path = "demo")
 public class MainController {
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping(path="/add")
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String password) {
+    public void addNewUser(@RequestParam String name, @RequestParam String password) {
         User user = new User(name, password);
         userRepository.save(user);
-        return "saved";
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody Iterable<User> getAll() {
-        return userRepository.findAll();
+    @GetMapping()
+    public String getAll(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "db";
     }
 
+    @PostMapping
+    public String add(@RequestParam String userName, @RequestParam String userPass, Model model) {
+        userRepository.save(new User(userName, userPass));
+        model.addAttribute("users", userRepository.findAll());
+        return "db";
+    }
 }
