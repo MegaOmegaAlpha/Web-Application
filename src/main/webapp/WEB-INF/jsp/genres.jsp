@@ -17,7 +17,7 @@
         <input type="text" name="rating" placeholder="Rating"/>
         <button type="submit">Search</button>
     </form>
-    <a href="/songs/newGenre">Add new genre</a>
+    <a href="/genres/newGenre">Add new genre</a>
     <table border="1">
         <thead>
         <tr>
