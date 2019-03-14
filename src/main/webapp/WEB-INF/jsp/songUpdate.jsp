@@ -1,4 +1,4 @@
-<%--
+<%@ page import="modelForTraining.Song" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 12.03.2019
@@ -12,8 +12,16 @@
 </head>
 <body>
 <main>
-    ye
-    <form>
+    <%
+        Song song = (Song) request.getAttribute("song");
+    %>
+    <form method="post">
+        <input type="text" name="songName" value=<%out.print("\"" + song.getName() + "\"");%> />
+        <input type="text" name="songAlbum" value=<%out.print("\"" + song.getAlbum() + "\"");%> />
+        <input type="number" name="songDuration" value=<%out.print("\"" + song.getDuration() + "\"");%> />
+        <input type="text" name="songArtist" value=<%out.print("\"" + song.getArtist().getName() + "\"");%> />
+        <input type="text" name="songGenre" value=<%out.print("\"" + song.getGenre().getName() + "\"");%> />
+        <button type="submit" name=<%out.print("\"" + song.getId() + "\"");%>>Confirm</button>
         <%
             /*updating song with current id*/
         %>

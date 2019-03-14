@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="modelForTraining.Artist" %>
+<%@ page import="modelForTraining.Song" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 12.03.2019
@@ -30,6 +32,19 @@
         <tbody>
         <%
             /*List<Artist> will be handled*/
+            List<Artist> artists = (List<Artist>) request.getAttribute("artists");
+            for (Artist artist : artists) {
+                out.print("<tr>");
+                out.print("<td rowspan=\"2\">" + artist.getName() + "</td>");
+                out.print("<td rowspan=\"2\">" + artist.getAge() + "</td>");
+                out.print("<td rowspan=\"2\"><select>");
+                for (Song song : artist.getSongList()) {
+                    out.print("<option>" + song.getName() + "</option>");
+                }
+                out.print("</select></td>");
+                out.print("<td rowspan=\"2\"><a href=\"/songs/song?id=" + artist.getId() + "\">" + "Edit" + "</a><br><a>Remove</a></td>");
+                out.print("</tr>");
+            }
         %>
         </tbody>
     </table>

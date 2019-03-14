@@ -1,4 +1,5 @@
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="modelForTraining.Song" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 11.03.2019
@@ -34,16 +35,16 @@
         </thead>
         <tbody>
         <%
-            List<String> stringList = (List<String>) request.getAttribute("songs");
-            for (String s : stringList) {
+            List<Song> songList = (List<Song>) request.getAttribute("songs");
+            for (Song song : songList) {
                 out.print("<tr>");
-                out.print("<td>" + s + "</td>");
-                out.print("<td>" + 52 + "</td>");
-                out.print("<td><a>" + "Any album" + "</a></td>");
-                out.print("<td><a>" + "Any artist" + "</a></td>");
-                out.print("<td><a>" + "Any genre" + "</a></td>");
-                out.print("<td rowspan=\"2\"><a href=\"/songs/song?id=\">" + "Edit" + "</a><br><a>Remove</a></td>");
-                out.print("<tr>");
+                out.print("<td rowspan=\"2\">" + song.getName() + "</td>");
+                out.print("<td rowspan=\"2\">" + song.getAlbum() + "</td>");
+                out.print("<td rowspan=\"2\">" + song.getDuration() + "</td>");
+                out.print("<td rowspan=\"2\"><a>" + song.getArtist().getName() + "</a></td>");
+                out.print("<td rowspan=\"2\"><a>" + song.getGenre().getName() + "</a></td>");
+                out.print("<td rowspan=\"2\"><a href=\"/songs/song?id=" + song.getId() + "\">" + "Edit" + "</a><br><a>Remove</a></td>");
+                out.print("</tr>");
             }
         %>
         </tbody>
