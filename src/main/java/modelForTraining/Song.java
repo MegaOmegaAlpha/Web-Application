@@ -1,6 +1,7 @@
 package modelForTraining;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 public class Song {
@@ -17,7 +18,7 @@ public class Song {
     private String album;
 
     @Column
-    private int duration;
+    private LocalTime duration;
 
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
@@ -27,7 +28,7 @@ public class Song {
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
-    public Song(String name, String album, int duration, Artist artist, Genre genre) {
+    public Song(String name, String album, LocalTime duration, Artist artist, Genre genre) {
         this.name = name;
         this.album = album;
         this.duration = duration;
@@ -62,11 +63,11 @@ public class Song {
         this.album = album;
     }
 
-    public int getDuration() {
+    public LocalTime getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(LocalTime duration) {
         this.duration = duration;
     }
 

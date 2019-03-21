@@ -35,14 +35,10 @@
             List<Artist> artists = (List<Artist>) request.getAttribute("artists");
             for (Artist artist : artists) {
                 out.print("<tr>");
-                out.print("<td rowspan=\"2\">" + artist.getName() + "</td>");
-                out.print("<td rowspan=\"2\">" + artist.getAge() + "</td>");
-                out.print("<td rowspan=\"2\"><select>");
-                for (Song song : artist.getSongList()) {
-                    out.print("<option>" + song.getName() + "</option>");
-                }
-                out.print("</select></td>");
-                out.print("<td rowspan=\"2\"><a href=\"/songs/song?id=" + artist.getId() + "\">" + "Edit" + "</a><br><a>Remove</a></td>");
+                out.print("<td rowspan=\"\">" + artist.getName() + "</td>");
+                out.print("<td rowspan=\"\">" + artist.getAge() + "</td>");
+                out.print("<td rowspan=\"\"><a href=\"/songs/search?name=&album=&duration=&artistName=" + artist.getName() + "&genreName=\">Song's collection</a></td>");
+                out.print("<td rowspan=\"\"><a href=\"/artists/artist?id=" + artist.getId() + "\">" + "Edit" + "</a><br><a>Remove</a></td>");
                 out.print("</tr>");
             }
         %>
