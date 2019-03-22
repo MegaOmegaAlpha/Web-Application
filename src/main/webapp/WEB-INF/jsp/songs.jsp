@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="column">
-                <table class="table" style="text-align: center">
+                <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
@@ -64,6 +64,7 @@
                     %>
                     </tbody>
                 </table>
+                <a href="/songs/newSong" class="btn btn-success mb-2">Add new song</a>
             </div>
         </div>
     </div>

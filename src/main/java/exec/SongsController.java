@@ -1,9 +1,6 @@
 package exec;
 
-import modelForTraining.ArtistRepository;
-import modelForTraining.GenreRepository;
-import modelForTraining.Song;
-import modelForTraining.SongRepository;
+import modelForTraining.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,10 @@ public class SongsController {
     @GetMapping("/song")
     String updateSong(@RequestParam String id, Model model) {
         model.addAttribute("song", songRepository.findById(Integer.parseInt(id)).orElse(null));
+        List<Artist> artists = (List<Artist>) artistRepository.findAll();
+        List<Genre> genres = (List<Genre>) genreRepository.findAll();
+        model.addAttribute("artists", artists);
+        model.addAttribute("genres", genres);
         return "songUpdate";
     }
 
@@ -71,7 +72,9 @@ public class SongsController {
 
     @GetMapping("/newSong")
     String addSong(Model model) {
-        return "songUpdate";
+        model.addAttribute("genres", genreRepository.findAll());
+        model.addAttribute("artists", artistRepository.findAll());
+        return "songCreate";
     }
 
     @GetMapping("/search")

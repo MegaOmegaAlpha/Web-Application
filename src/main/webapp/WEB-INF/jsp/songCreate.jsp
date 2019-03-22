@@ -1,11 +1,10 @@
-<%@ page import="modelForTraining.Song" %>
 <%@ page import="modelForTraining.Artist" %>
 <%@ page import="java.util.List" %>
 <%@ page import="modelForTraining.Genre" %><%--
   Created by IntelliJ IDEA.
-  User: User
-  Date: 12.03.2019
-  Time: 0:35
+  User: root
+  Date: 22.03.19
+  Time: 21:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,7 +16,6 @@
 <body>
 <main class="m-3">
     <%
-        Song song = (Song) request.getAttribute("song");
         List<Artist> artists = (List<Artist>) request.getAttribute("artists");
         List<Genre> genres = (List<Genre>) request.getAttribute("genres");
     %>
@@ -35,15 +33,15 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="songNameId">Title</label>
-                            <input type="text" name="songName" id="songNameId" class="form-control" value="<%=song.getName()%>"/>
+                            <input type="text" name="songName" id="songNameId" class="form-control" placeholder="Name"/>
                         </div>
                         <div class="form-group col">
                             <label for="songAlbumId">Album</label>
-                            <input type="text" name="songName" id="songAlbumId" class="form-control" value="<%=song.getAlbum()%>"/>
+                            <input type="text" name="songName" id="songAlbumId" class="form-control" placeholder="Album"/>
                         </div>
                         <div class="form-group col">
                             <label for="songDurationId">Duration</label>
-                            <input type="time" name="songName" id="songDurationId" class="form-control" value="<%=song.getDuration()%>"/>
+                            <input type="time" name="songName" id="songDurationId" class="form-control" placeholder="Duration"/>
                         </div>
                     </div>
                     <div class="form-row">
@@ -52,8 +50,7 @@
                             <select name="songName" id="songArtistId" class="form-control">
                                 <%
                                     for (Artist artist : artists) {
-                                        String selected = song.getArtist().getId() == artist.getId() ? "selected" : "";
-                                        out.print("<option" + selected +" value=\"" + artist.getId() + "\">");
+                                        out.print("<option value=\"" + artist.getId() + "\">");
                                         out.print(artist.getName());
                                         out.print("</option>");
                                     }
@@ -65,8 +62,7 @@
                             <select type="text" name="songName" id="songGenreId" class="form-control">
                                 <%
                                     for (Genre genre : genres) {
-                                        String selected = song.getArtist().getId() == genre.getId() ? "selected" : "";
-                                        out.print("<option" + selected +" value=\"" + genre.getId() + "\">");
+                                        out.print("<option value=\"" + genre.getId() + "\">");
                                         out.print(genre.getName());
                                         out.print("</option>");
                                     }
@@ -74,7 +70,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Confirm</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </form>
             </div>
         </div>
