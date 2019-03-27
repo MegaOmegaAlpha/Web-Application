@@ -23,12 +23,13 @@ public class GenresController {
 
     @GetMapping("/genre")
     String updateGenre(@RequestParam String id, Model model) {
-        return "genreUpdate";
+        model.addAttribute("genre", genreRepository.findById(Integer.parseInt(id)).get());
+        return "genreUpdateCreate";
     }
 
     @GetMapping("/newGenre")
     String addArtist(Model model) {
-        return "genreUpdate";
+        return "genreUpdateCreate";
     }
 
 }

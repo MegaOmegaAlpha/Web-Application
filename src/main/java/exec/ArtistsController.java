@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArtistsController {
 
     @Autowired
-    ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
     @GetMapping("")
     String getArtists(Model model) {
@@ -23,12 +23,13 @@ public class ArtistsController {
 
     @GetMapping("/artist")
     String updateGenre(@RequestParam String id, Model model) {
-        return "artistUpdate";
+        model.addAttribute("artist", artistRepository.findById(Integer.parseInt(id)).get());
+        return "artistUpdateCreate";
     }
 
     @GetMapping("/newArtist")
     String addArtist(Model model) {
-        return "artistUpdate";
+        return "artistUpdateCreate";
     }
 
 }
