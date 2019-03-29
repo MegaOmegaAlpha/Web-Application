@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "genre")
 public class Genre {
 
     @Id
@@ -18,7 +19,11 @@ public class Genre {
     @Column
     private int rating;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "song_genre",
+            joinColumns = @JoinColumn(name = "genre_id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id")
+    )
     private List<Song> songList = new ArrayList<>();
 
     public Genre(String name, int rating) {

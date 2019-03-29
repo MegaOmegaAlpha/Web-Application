@@ -22,7 +22,7 @@
 </head>
 <body>
 <main>
-    <div class="container text-center">
+    <div class="container">
         <div class="card text-center">
             <div class="card-header">
                 <h1>Welcome!</h1>

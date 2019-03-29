@@ -30,15 +30,25 @@
 </head>
 <body class="m-3">
 <main>
-    <div class="container text-center">
-        <form class="form-inline">
-            <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
-            <input type="text" name="album" placeholder="Album" class="form-control mb-2 mr-sm-2"/>
-            <input type="time" name="duration" placeholder="Duration" class="form-control mb-2 mr-sm-2"/>
-            <input type="text" name="artistName" placeholder="Name of artist" class="form-control mb-2 mr-sm-2"/>
-            <input type="text" name="genreName" placeholder="Name of genre" class="form-control mb-2 mr-sm-2"/>
-            <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
-        </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col-10 text-center">
+                <form class="form-inline">
+                    <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
+                    <input type="text" name="album" placeholder="Album" class="form-control mb-2 mr-sm-2"/>
+                    <input type="time" name="duration" placeholder="Duration" class="form-control mb-2 mr-sm-2"/>
+                    <input type="text" name="artistName" placeholder="Name of artist" class="form-control mb-2 mr-sm-2"/>
+                    <input type="text" name="genreName" placeholder="Name of genre" class="form-control mb-2 mr-sm-2"/>
+                    <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
+                </form>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
     </div>
     <div class="container-fluid text-center">
         <div class="row">
@@ -70,8 +80,8 @@
                                 out.print("<td rowspan=\"\">" + song.getName() + "</td>");
                                 out.print("<td rowspan=\"\">" + song.getAlbum() + "</td>");
                                 out.print("<td rowspan=\"\">" + song.getDuration() + "</td>");
-                                out.print("<td rowspan=\"\"><a>" + song.getArtist().getName() + ", " + song.getArtist().getAge() + "</a></td>");
-                                out.print("<td rowspan=\"\"><a>" + song.getGenre().getName() + "</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/songs/songArtists?id=" + song.getId() + "\">" + "Artists' collection" + "</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/songs/songGenres?id=" + song.getId() + "\">" + "Genres' collection" + "</a></td>");
                                 out.print("<td rowspan=\"\"><a href=\"/songs/song?id=" + song.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a class=\"btn btn-outline-danger\">Remove</a></td>");
                                 out.print("</tr>");
                             }

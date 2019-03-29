@@ -32,4 +32,10 @@ public class ArtistsController {
         return "artistUpdateCreate";
     }
 
+    @GetMapping("/artistSongs")
+    String songsOfArtist(@RequestParam String id, Model model) {
+        model.addAttribute("songs", artistRepository.findById(Integer.parseInt(id)).get().getSongList());
+        return "artistSongs";
+    }
+
 }

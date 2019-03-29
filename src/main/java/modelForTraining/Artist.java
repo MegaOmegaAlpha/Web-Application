@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "artist")
 public class Artist {
 
     @Id
@@ -19,8 +20,12 @@ public class Artist {
     @Column
     private int age;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")
-    private List<Song> songList = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "song_artist",
+            joinColumns = @JoinColumn(name = "artist_id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id")
+    )
+    private List<Song> songs = new ArrayList<>();
 
     public Artist(String name, int age) {
         this.name = name;
@@ -55,10 +60,10 @@ public class Artist {
     }
 
     public List<Song> getSongList() {
-        return songList;
+        return songs;
     }
 
     public void setSongList(List<Song> songList) {
-        this.songList = songList;
+        this.songs = songList;
     }
 }

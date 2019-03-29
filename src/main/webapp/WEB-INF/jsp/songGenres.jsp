@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: User
-  Date: 12.03.2019
-  Time: 0:20
+  User: bairamov-vladimir
+  Date: 29.03.19
+  Time: 12:35
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -24,23 +24,6 @@
 </head>
 <body>
 <main class="m-3">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-
-            </div>
-            <div class="col-5">
-                <form class="form-inline">
-                    <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
-                    <input type="text" name="rating" placeholder="Rating" class="form-control mb-2 mr-sm-2"/>
-                    <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
-                </form>
-            </div>
-            <div class="col">
-
-            </div>
-        </div>
-    </div>
     <div class="container-fluid text-center">
         <div class="row">
             <div class="col text-right">
@@ -71,7 +54,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="/genres/newGenre" class="btn btn-success mb-2">Add new genre</a>
             </div>
             <div class="col">
 

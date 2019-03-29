@@ -39,7 +39,7 @@ public class SongsController {
 
     @GetMapping("/song")
     String updateSong(@RequestParam String id, Model model) {
-        model.addAttribute("song", songRepository.findById(Integer.parseInt(id)).orElse(null));
+        model.addAttribute("song", songRepository.findById(Integer.parseInt(id)).get());
         List<Artist> artists = (List<Artist>) artistRepository.findAll();
         List<Genre> genres = (List<Genre>) genreRepository.findAll();
         model.addAttribute("artists", artists);
@@ -57,8 +57,8 @@ public class SongsController {
             song.setName(songName);
             song.setAlbum(songAlbum);
             song.setDuration(LocalTime.parse(songDuration));
-            song.setArtist(artistRepository.findById(Integer.parseInt(songArtistId)).get());
-            song.setGenre(genreRepository.findById(Integer.parseInt(songGenreId)).get());
+            /*song.setArtist(artistRepository.findById(Integer.parseInt(songArtistId)).get());
+            song.setGenre(genreRepository.findById(Integer.parseInt(songGenreId)).get());*/
             songRepository.save(song);
             try {
                 response.sendRedirect("/songs");
@@ -86,9 +86,21 @@ public class SongsController {
         artistName = artistName == null ? "" : artistName;
         genreName = genreName == null ? "" : genreName;
         LocalTime durationTime = duration.equals("") ? LocalTime.MIN : LocalTime.parse(duration);
-        if (!name.equals("") || !album.equals("") || !durationTime.equals(LocalTime.MIN)) {
+        /*if (!name.equals("") || !album.equals("") || !durationTime.equals(LocalTime.MIN)) {
             model.addAttribute("songs", songRepository.findByParams(name, album, durationTime, artistName, genreName));
-        }
+        }*/
         return "songs";
+    }
+
+    @GetMapping("/songArtists")
+    String getArtistsOfSong(@RequestParam String id, Model model) {
+        model.addAttribute("artists", songRepository.findById(Integer.parseInt(id)).get().getArtists());
+        return "songArtists";
+    }
+
+    @GetMapping("/songGenres")
+    String getGenresOfSong(@RequestParam String id, Model model) {
+        model.addAttribute("genres", songRepository.findById(Integer.parseInt(id)).get().getGenres());
+        return "songGenres";
     }
 }

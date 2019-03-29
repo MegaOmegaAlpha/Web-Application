@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.jws.WebParam;
+
 @Controller
 @RequestMapping("/genres")
 public class GenresController {
@@ -30,6 +32,12 @@ public class GenresController {
     @GetMapping("/newGenre")
     String addArtist(Model model) {
         return "genreUpdateCreate";
+    }
+
+    @GetMapping("/genreSongs")
+    String songsOfGenre(@RequestParam String id, Model model) {
+        model.addAttribute("songs", genreRepository.findById(Integer.parseInt(id)).get().getSongList());
+        return "genreSongs";
     }
 
 }

@@ -54,31 +54,36 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col">
-                            <label for="songArtistId">Artist</label>
-                            <select name="songArtistId" id="songArtistId" class="form-control">
-                                <%
+                        <div class="form-group col" id="artist-col-id">
+                            <label for="songArtistId">Artists</label>
+                            <%
+                                for (Artist artistItem : song.getArtists()) {
+                                    out.print("<select name=\"songArtistId\" id=\"songArtistId\" class=\"form-control\"");
                                     for (Artist artist : artists) {
-                                        String selected = song != null && song.getArtist().getId() == artist.getId() ? "selected" : "";
+                                        String selected = song != null && artistItem.getId() == artist.getId() ? "selected" : "";
                                         out.print("<option " + selected +" value=\"" + artist.getId() + "\">");
                                         out.print(artist.getName() + ", " + artist.getAge());
                                         out.print("</option>");
                                     }
-                                %>
-                            </select>
+                                    out.print("</select>");
+                                }
+                            %>
+                            <button type="button" class="btn btn-success" onclick="addArtistField(this)" name="0">+</button>
                         </div>
                         <div class="form-group col">
                             <label for="songGenreId">Genre</label>
-                            <select type="text" name="songGenreId" id="songGenreId" class="form-control">
-                                <%
+                            <%
+                                for (Genre genreItem : song.getGenres()) {
+                                    out.print("<select type=\"text\" name=\"songGenreId\" id=\"songGenreId\" class=\"form-control\">");
                                     for (Genre genre : genres) {
-                                        String selected = song != null && song.getArtist().getId() == genre.getId() ? "selected" : "";
+                                        String selected = song != null && genreItem.getId() == genre.getId() ? "selected" : "";
                                         out.print("<option " + selected +" value=\"" + genre.getId() + "\">");
                                         out.print(genre.getName());
                                         out.print("</option>");
                                     }
-                                %>
-                            </select>
+                                    out.print("</select>");
+                                }
+                            %>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Confirm</button>
@@ -90,5 +95,12 @@
         </div>
     </div>
 </main>
+<script type="text/javascript">
+    function addArtistField(btn) {
+        var select = document.getElementById('songArtistId');
+        var clone = select.clone();
+        document.getElementById('artist-col-id').appendChild(clone);
+    }
+</script>
 </body>
 </html>

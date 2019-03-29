@@ -2,8 +2,11 @@ package modelForTraining;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "song")
 public class Song {
 
     @Id
@@ -20,20 +23,26 @@ public class Song {
     @Column
     private LocalTime duration;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id", nullable = false)
-    private Artist artist;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "song_artist",
+            joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id")
+    )
+    private List<Artist> artists = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id", nullable = false)
-    private Genre genre;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "song_genre",
+            joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres = new ArrayList<>();
 
-    public Song(String name, String album, LocalTime duration, Artist artist, Genre genre) {
+    public Song(String name, String album, LocalTime duration, List<Artist> artists, List<Genre> genres) {
         this.name = name;
         this.album = album;
         this.duration = duration;
-        this.artist = artist;
-        this.genre = genre;
+        this.artists = artists;
+        this.genres = genres;
     }
 
     public Song() {
@@ -71,19 +80,20 @@ public class Song {
         this.duration = duration;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public List<Artist> getArtists() {
+        return artists;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
+
 }
