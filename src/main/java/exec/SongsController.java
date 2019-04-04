@@ -49,16 +49,22 @@ public class SongsController {
 
     @PostMapping("/song")
     String updateSong(@RequestParam String songName, @RequestParam String songAlbum,
-                      @RequestParam String songDuration, @RequestParam String songArtistId,
-                      @RequestParam String songGenreId, @RequestParam String id, HttpServletResponse response) {
-        if (songName != null && songAlbum != null && songDuration != null && songArtistId != null &&
-                songGenreId != null && id != null) {
+                      @RequestParam String songDuration, @RequestParam List<String> songArtistIdList,
+                      @RequestParam List<String> songGenreIdList, @RequestParam String id, HttpServletResponse response) {
+        if (songName != null && songAlbum != null && songDuration != null && songArtistIdList != null &&
+                songGenreIdList != null && id != null) {
             Song song = songRepository.findById(Integer.parseInt(id)).get();
             song.setName(songName);
             song.setAlbum(songAlbum);
             song.setDuration(LocalTime.parse(songDuration));
             /*song.setArtist(artistRepository.findById(Integer.parseInt(songArtistId)).get());
             song.setGenre(genreRepository.findById(Integer.parseInt(songGenreId)).get());*/
+            for (String artistId : songArtistIdList) {
+                song.getArtists().add(artistRepository.findById(Integer.parseInt(artistId)).get());
+            }
+            for (String genreId : songGenreIdList) {
+                song.getGenres().add(genreRepository.findById(Integer.parseInt(genreId)).get());
+            }
             songRepository.save(song);
             try {
                 response.sendRedirect("/songs");

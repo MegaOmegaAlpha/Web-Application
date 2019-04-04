@@ -59,7 +59,7 @@
                             <div class="selector" id="selector-id">
                                 <%
                                     for (Artist artistItem : song.getArtists()) {
-                                        out.print("<select name=\"songArtistId\" id=\"songArtistId\" class=\"form-control mb-2\"");
+                                        out.print("<select name=\"songArtistIdList\" id=\"songArtistId\" class=\"form-control mb-2\"");
                                         for (Artist artist : artists) {
                                             String selected = song != null && artistItem.getId() == artist.getId() ? "selected" : "";
                                             out.print("<option " + selected +" value=\"" + artist.getId() + "\">");
@@ -77,7 +77,7 @@
                             <div class="selector">
                                 <%
                                     for (Genre genreItem : song.getGenres()) {
-                                        out.print("<select type=\"text\" name=\"songGenreId\" id=\"songGenreId\" class=\"form-control mb-2\">");
+                                        out.print("<select type=\"text\" name=\"songGenreIdList\" id=\"songGenreId\" class=\"form-control mb-2\">");
                                         for (Genre genre : genres) {
                                             String selected = song != null && genreItem.getId() == genre.getId() ? "selected" : "";
                                             out.print("<option " + selected +" value=\"" + genre.getId() + "\">");
