@@ -18,10 +18,9 @@ public class TrackController {
 
     @RequestMapping(value = "/getAllTracks", method = RequestMethod.GET, headers = "Accept=application/json")
     public String getTracks(Model model) {
-        List<Track> listOfTracks = trackService.getAll();
+        Iterable<Track> listOfTracks = trackService.getAll();
         model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", listOfTracks);
-//        model.addAttribute("artist_name", )
         return "jsp/trackList";
     }
 
@@ -43,19 +42,23 @@ public class TrackController {
         return "jsp/addTrack";
     }
 
-    @RequestMapping(value= "/saveTrack", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value= "/saveTrack", method = RequestMethod.GET, headers = "Accept=application/json")
     public String saveTrack(@ModelAttribute("track") Track track){
         trackService.updateTrack(track);
         return "redirect:/getAllTracks";
     }
 
-    @RequestMapping(value = "/deleteTrack/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/deleteTrack/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
     public String deleteTrack(@PathVariable("id") int id) {
         trackService.deleteTrack(id);
         return "redirect:/getAllTracks";
     }
-
-
+    @RequestMapping(value = "/findByArtistAge/{from},{to}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public String findByArtistAge(@PathVariable("from") Integer from, @PathVariable("to") Integer to,  Model model){
+        model.addAttribute("track", new Track());
+        model.addAttribute("listOfTracks", trackService.findAllByArtistsAgeGreaterThan(from, to));
+        return "jsp/trackList";
+    }
 }
 
 

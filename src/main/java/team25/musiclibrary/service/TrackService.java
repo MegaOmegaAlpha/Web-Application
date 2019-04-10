@@ -1,7 +1,6 @@
 package team25.musiclibrary.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,15 +8,22 @@ import org.springframework.transaction.annotation.Transactional;
 import team25.musiclibrary.dao.TrackDAO;
 import team25.musiclibrary.entities.Track;
 
+import javax.sql.DataSource;
+
 @Service("trackService")
 public class TrackService {
 
     @Autowired
+    DataSource dataSource;
+    private String url = "jdbc:mysql://localhost:3306/music_store?serverTimezone=UTC";
+    private String userName = "root";
+    private String password = "B291098b";
+    @Autowired
     TrackDAO trackDAO;
 
     @Transactional
-    public List getAll() {
-        return (List) trackDAO.findAll();
+    public Iterable getAll() {
+        return trackDAO.findAll();
     }
 
     @Transactional
@@ -38,6 +44,11 @@ public class TrackService {
     @Transactional
     public void deleteTrack(int id) {
         trackDAO.deleteById(id);
+    }
+
+    @Transactional
+    public List<Track> findAllByArtistsAgeGreaterThan(Integer from, Integer to){
+        return trackDAO.findAllByArtists_AgeBetween(from, to);
     }
 
 }

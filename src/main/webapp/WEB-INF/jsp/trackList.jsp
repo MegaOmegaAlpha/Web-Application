@@ -33,15 +33,27 @@
         <ul class="navbar-nav mr-auto">
 </ul>
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>			</form>		  </div>		</nav><div class="m-5">
-    <div class="form-group" style=""></div>
-    <select class="form-control" onchange="window.location.href=this.options[this.selectedIndex].value" style="text-align: left; width: 100px; left: 425px; text-decoration-line: none; float: left; position: relative; display: block; bottom: 60px;">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+</nav>
+    <div class="m-5">
+    <div  type="text" style="margin-top: 100px; margin-left: 280px">Search for all tracks that have an artist's age within: </div>
+    <form action="/findByArtistAge/" class="form-inline my-2 my-lg-0" style="child-align: middle">
+        <input class="form-control mr-sm-2" name="from," type="number" placeholder="from" style="width: 150px; margin-top: 10px; margin-left: 250px">
+        <input class="form-control mr-sm-2" name="to" type="number" placeholder="to" style="width: 150px; margin-top: 10px">
+        <form action="" method="get" >
+            <button  value="/findByArtistAge/" class="btn btn-secondary" style="width: 100px;  margin-top: 10px; margin-left: 20px;">Search</button>
+        </form>
+    </form>
+    <select class="form-control" onchange="window.location.href=this.options[this.selectedIndex].value" style="text-align: left; width: 100px; left: 425px; text-decoration-line: none; float: left; position: relative; display: block; bottom: 130px;">
         <option selected value="">Tracks</option>
         <option value="/getAllArtists">Artists</option>
         <option value="/getAllGenres">Genres</option>
     </select>
     <c:if test="${!empty listOfTracks}">
-    <table class="table" style="text-align: center; width: 800px; margin-top: 80px;">
+    <table class="table" style="text-align: center; width: 800px; margin-top: 30px;">
         <thead>
         <tr>
             <th width="80">Id</th>
