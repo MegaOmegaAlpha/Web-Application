@@ -1,7 +1,5 @@
 package team25.musiclibrary.controllers;
 
-import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +54,13 @@ public class TrackController {
     @RequestMapping(value = "/findByArtistAge/{from},{to}", method = RequestMethod.GET, headers = "Accept=application/json")
     public String findByArtistAge(@PathVariable("from") Integer from, @PathVariable("to") Integer to,  Model model){
         model.addAttribute("track", new Track());
-        model.addAttribute("listOfTracks", trackService.findAllByArtistsAgeGreaterThan(from, to));
+        model.addAttribute("listOfTracks", trackService.findAllByArtists_AgeBetween(from, to));
+        return "jsp/trackList";
+    }
+    @RequestMapping(value = "/findAllByGenres_RatingLike/{rating}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public String findAllByGenres_RatingLike(@PathVariable("rating") Integer rating, Model model){
+        model.addAttribute("track", new Track());
+        model.addAttribute("listOfTracks", trackService.findAllByGenres_RatingLike(rating));
         return "jsp/trackList";
     }
 }

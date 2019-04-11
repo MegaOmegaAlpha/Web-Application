@@ -47,8 +47,11 @@ public class TrackService {
     }
 
     @Transactional
-    public List<Track> findAllByArtistsAgeGreaterThan(Integer from, Integer to){
+    public List<Track> findAllByArtists_AgeBetween(Integer from, Integer to){
         return trackDAO.findAllByArtists_AgeBetween(from, to);
     }
-
+    @Transactional
+    public List<Track> findAllByGenres_RatingLike(Integer rating){
+        return trackDAO.findAllByGenres_RatingLike(rating);
+    }
 }
