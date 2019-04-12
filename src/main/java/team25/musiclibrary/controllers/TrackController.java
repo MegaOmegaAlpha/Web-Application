@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import team25.musiclibrary.entities.Track;
+import team25.musiclibrary.service.ArtistService;
+import team25.musiclibrary.service.GenreService;
 import team25.musiclibrary.service.TrackService;
 
 @Controller
@@ -14,12 +16,18 @@ public class TrackController {
     @Autowired
     TrackService trackService;
 
+    @Autowired
+    ArtistService artistService;
+
+    @Autowired
+    GenreService genreService;
+
     @RequestMapping(value = "/getAllTracks", method = RequestMethod.GET, headers = "Accept=application/json")
     public String getTracks(Model model) {
         Iterable<Track> listOfTracks = trackService.getAll();
         model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", listOfTracks);
-        return "jsp/trackList";
+        return "jsp/songs";
     }
 
     @RequestMapping(value = "/getTrack/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -27,17 +35,24 @@ public class TrackController {
         return trackService.getTrack(id);
     }
 
-    @RequestMapping(value = "/addTrack", method = RequestMethod.GET, headers = "Accept=application/json")
+    @GetMapping("/addTrack")
+    public String addTrackPage(Model model) {
+        model.addAttribute("artistList", artistService.getAll());
+        model.addAttribute("genreList", genreService.getAll());
+        return "jsp/songUpdateCreate";
+    }
+
+    /*@RequestMapping(value = "/addTrack", method = RequestMethod.GET, headers = "Accept=application/json")
     public String addTrack(@ModelAttribute("track") Track track) {
         trackService.addTrack(track);
         return "redirect:/getAllTracks";
-    }
+    }*/
 
     @RequestMapping(value = "/updateTrack/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public String updateTrack(@PathVariable("id") int id, Model model) {
         model.addAttribute("track", trackService.getTrack(id));
         model.addAttribute("listOfTracks", trackService.getAll());
-        return "jsp/addTrack";
+        return "jsp/songUpdateCreate";
     }
 
     @RequestMapping(value= "/saveTrack", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -51,6 +66,7 @@ public class TrackController {
         trackService.deleteTrack(id);
         return "redirect:/getAllTracks";
     }
+
     @RequestMapping(value = "/findByArtistAge/{from},{to}", method = RequestMethod.GET, headers = "Accept=application/json")
     public String findByArtistAge(@PathVariable("from") Integer from, @PathVariable("to") Integer to,  Model model){
         model.addAttribute("track", new Track());

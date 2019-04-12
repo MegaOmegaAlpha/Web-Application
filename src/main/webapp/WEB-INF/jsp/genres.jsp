@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: User
   Date: 12.03.2019
-  Time: 0:13
+  Time: 0:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -32,7 +32,7 @@
             <div class="col-5">
                 <form class="form-inline">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
-                    <input type="text" name="age" placeholder="Age" class="form-control mb-2 mr-sm-2"/>
+                    <input type="text" name="rating" placeholder="Rating" class="form-control mb-2 mr-sm-2"/>
                     <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
                 </form>
             </div>
@@ -46,8 +46,8 @@
             <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
+                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
                     <a href="/songs" class="btn btn-light mb-2">Songs</a>
-                    <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
             <div class="col-5">
@@ -55,23 +55,23 @@
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Age</th>
+                        <th scope="col">Rating</th>
                         <th scope="col">Songs' collection</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="artist" items="${artists}">
+                    <c:forEach var="genre" items="${listOfGenres}">
                         <tr>
-                            <td><c:out value="${artist.name}"/></td>
-                            <td><c:out value="${artist.age}"/></td>
-                            <td><a href="/artists/artistSongs?id=${artist.id}">Songs' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/artists/artist?id=${artist.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
+                            <td><c:out value="${genre.name}"/></td>
+                            <td><c:out value="${genre.rating}"/></td>
+                            <td><a href="/genres/genreSongs?id=${genre.id}">Songs' collection</a></td>
+                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/genres/genre?id=${genre.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="/artists/newArtist" class="btn btn-success mb-2">Add new artist</a>
+                <a href="/genres/newGenre" class="btn btn-success mb-2">Add new genre</a>
             </div>
             <div class="col">
 

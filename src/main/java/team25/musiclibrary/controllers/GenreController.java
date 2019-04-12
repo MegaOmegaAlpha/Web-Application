@@ -24,7 +24,7 @@ public class GenreController {
         List<Genre> genreList = genreService.getAll();
         model.addAttribute("genre", new Genre());
         model.addAttribute("listOfGenres", genreList);
-        return "jsp/genreList";
+        return "jsp/genres";
     }
     @RequestMapping(value = "/getGenre/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public Genre getGenreById(@PathVariable int id) {

@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="modelForTraining.Song" %><%--
+<%@ page import="team25.musiclibrary.entities.Track" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 11.03.2019
@@ -35,13 +35,11 @@
             <div class="col">
 
             </div>
-            <div class="col-10 text-center">
+            <div class="col- text-center">
                 <form class="form-inline">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="album" placeholder="Album" class="form-control mb-2 mr-sm-2"/>
                     <input type="time" name="duration" placeholder="Duration" class="form-control mb-2 mr-sm-2"/>
-                    <input type="text" name="artistName" placeholder="Name of artist" class="form-control mb-2 mr-sm-2"/>
-                    <input type="text" name="genreName" placeholder="Name of genre" class="form-control mb-2 mr-sm-2"/>
                     <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
                 </form>
             </div>
@@ -73,9 +71,9 @@
                     </thead>
                     <tbody>
                     <%
-                        List<Song> songList = (List<Song>) request.getAttribute("songs");
+                        List<Track> songList = (List<Track>) request.getAttribute("listOfTracks");
                         if (songList != null) {
-                            for (Song song : songList) {
+                            for (Track song : songList) {
                                 out.print("<tr>");
                                 out.print("<td rowspan=\"\">" + song.getName() + "</td>");
                                 out.print("<td rowspan=\"\">" + song.getAlbum() + "</td>");
@@ -89,7 +87,7 @@
                     %>
                     </tbody>
                 </table>
-                <a href="/songs/newSong" class="btn btn-success mb-2">Add new song</a>
+                <a href="/addTrack" class="btn btn-success mb-2">Add new song</a>
             </div>
         </div>
     </div>

@@ -49,7 +49,7 @@ public class Track{
         this.duration = duration;
     }
 
-    public String getArtists() {
+    /*public String getArtists() {
         String artistsNames = "";
         int artistsSize = artists.size();
         for (int i = 0; i < artistsSize; ++i){
@@ -74,9 +74,23 @@ public class Track{
             genresNames = genresNames.concat(genres.get(i).getName());
         }
         return genresNames;
+    }*/
+
+    public List<Artist> getArtists() {
+        return artists;
     }
 
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
+    }
 
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
 
     public int getId() {
         return id;

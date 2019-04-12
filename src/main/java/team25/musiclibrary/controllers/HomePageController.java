@@ -9,7 +9,7 @@ public class HomePageController {
 
     @GetMapping("/")
     public String hello(){
-        return "jsp/trackList";
+        return "jsp/index";
     }
 
     @GetMapping("/getHome")

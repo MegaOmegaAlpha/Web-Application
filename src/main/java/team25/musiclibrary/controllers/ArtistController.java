@@ -24,7 +24,7 @@ public class ArtistController {
         List<Artist> artistList = artistService.getAll();
         model.addAttribute("artist", new Artist());
         model.addAttribute("listOfArtists", artistList);
-        return "jsp/artistList";
+        return "jsp/artists";
     }
     @RequestMapping(value = "/getArtist/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public Artist getArtistById(@PathVariable int id) {

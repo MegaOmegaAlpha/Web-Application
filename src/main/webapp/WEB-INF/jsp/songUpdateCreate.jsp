@@ -1,8 +1,10 @@
-<%@ page import="modelForTraining.Song" %>
-<%@ page import="modelForTraining.Artist" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page import="java.util.List" %>
-<%@ page import="modelForTraining.Genre" %><%--
-  Created by IntelliJ IDEA.
+<%@ page import="team25.musiclibrary.entities.Artist" %>
+<%@ page import="team25.musiclibrary.entities.Genre" %>
+<%@ page import="team25.musiclibrary.entities.Track" %>
+Created by IntelliJ IDEA.
   User: User
   Date: 12.03.2019
   Time: 0:35
@@ -23,9 +25,9 @@
 <body>
 <main class="m-3">
     <%
-        Song song = (Song) request.getAttribute("song");
-        List<Artist> artists = (List<Artist>) request.getAttribute("artists");
-        List<Genre> genres = (List<Genre>) request.getAttribute("genres");
+        Track song = (Track) request.getAttribute("song");
+        List<Artist> artists = (List<Artist>) request.getAttribute("artistList");
+        List<Genre> genres = (List<Genre>) request.getAttribute("genreList");
     %>
     <div class="container-fluid">
         <div class="row">
@@ -38,7 +40,7 @@
                 </div>
             </div>
             <div class="col text-center">
-                <form method="post">
+                <form method="post" action="/saveTrack">
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="songNameId">Title</label>
@@ -58,15 +60,17 @@
                             <label for="songArtistId">Artists</label>
                             <div class="selector" id="selector-id">
                                 <%
-                                    for (Artist artistItem : song.getArtists()) {
-                                        out.print("<select name=\"songArtistIdList\" id=\"songArtistId\" class=\"form-control mb-2\"");
-                                        for (Artist artist : artists) {
-                                            String selected = song != null && artistItem.getId() == artist.getId() ? "selected" : "";
-                                            out.print("<option " + selected +" value=\"" + artist.getId() + "\">");
-                                            out.print(artist.getName() + ", " + artist.getAge());
-                                            out.print("</option>");
+                                    if (song.getArtists() != null) {
+                                        for (Artist artistItem : song.getArtists()) {
+                                            out.print("<select name=\"songArtistIdList\" id=\"songArtistId\" class=\"form-control mb-2\"");
+                                            for (Artist artist : artists) {
+                                                String selected = song != null && artistItem.getId() == artist.getId() ? "selected" : "";
+                                                out.print("<option " + selected + " value=\"" + artist.getId() + "\">");
+                                                out.print(artist.getName() + ", " + artist.getAge());
+                                                out.print("</option>");
+                                            }
+                                            out.print("</select>");
                                         }
-                                        out.print("</select>");
                                     }
                                 %>
                             </div>
@@ -76,15 +80,17 @@
                             <label for="songGenreId">Genre</label>
                             <div class="selector">
                                 <%
-                                    for (Genre genreItem : song.getGenres()) {
-                                        out.print("<select type=\"text\" name=\"songGenreIdList\" id=\"songGenreId\" class=\"form-control mb-2\">");
-                                        for (Genre genre : genres) {
-                                            String selected = song != null && genreItem.getId() == genre.getId() ? "selected" : "";
-                                            out.print("<option " + selected +" value=\"" + genre.getId() + "\">");
-                                            out.print(genre.getName());
-                                            out.print("</option>");
+                                    if (song.getGenres() != null) {
+                                        for (Genre genreItem : song.getGenres()) {
+                                            out.print("<select type=\"text\" name=\"songGenreIdList\" id=\"songGenreId\" class=\"form-control mb-2\">");
+                                            for (Genre genre : genres) {
+                                                String selected = song != null && genreItem.getId() == genre.getId() ? "selected" : "";
+                                                out.print("<option " + selected + " value=\"" + genre.getId() + "\">");
+                                                out.print(genre.getName());
+                                                out.print("</option>");
+                                            }
+                                            out.print("</select>");
                                         }
-                                        out.print("</select>");
                                     }
                                 %>
                             </div>
