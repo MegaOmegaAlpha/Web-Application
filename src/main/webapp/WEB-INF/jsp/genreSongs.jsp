@@ -30,9 +30,9 @@
             <div class="col-sm-">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/genres" class="btn btn-light mb-2">Back</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
-                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
+                    <a href="/getAllGenres" class="btn btn-light mb-2">Back</a>
+                    <a href="/getAllTracks" class="btn btn-light mb-2">Songs</a>
+                    <a href="/getAllTracks" class="btn btn-light mb-2">Artists</a>
                 </div>
             </div>
             <div class="col">
@@ -53,9 +53,11 @@
                             <td>${song.name}</td>
                             <td>${song.album}</td>
                             <td>${song.duration}</td>
-                            <td><a href="/songs/songArtists?id=${song.id}">Artists' collection</a></td>
-                            <td><a href="/songs/songGenres?id=${song.id}">Genres' collection</a></td>
-                            <td><a href="/songs/song?id=${song.id}" class="btn btn-outline-warning mr-2">Edit</a><a href="" class="btn btn-outline-danger">Remove</a></td>
+                            <td><a href="/trackArtists?id=${song.id}">Artists' collection</a></td>
+                            <td><a href="/trackGenres?id=${song.id}">Genres' collection</a></td>
+                            <td>
+                                <a href="/updateTrack/${song.id}" class="btn btn-outline-warning mr-2">Edit</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

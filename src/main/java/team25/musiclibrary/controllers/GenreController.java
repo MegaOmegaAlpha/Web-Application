@@ -4,10 +4,7 @@ package team25.musiclibrary.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import team25.musiclibrary.entities.Genre;
 import team25.musiclibrary.service.GenreService;
 
@@ -31,8 +28,14 @@ public class GenreController {
         return genreService.getGenre(id);
     }
 
+    @GetMapping("/addGenre")
+    public String addGenrePage(Model model) {
+        return "jsp/genreUpdateCreate";
+    }
+
     @RequestMapping(value = "/addGenre", method = RequestMethod.POST, headers = "Accept=application/json")
-    public String addGenre(@ModelAttribute("genre") Genre genre) {
+    public String addGenre(@RequestParam String name, @RequestParam String rating) {
+        Genre genre = new Genre(name, Integer.parseInt(rating));
         genreService.addGenre(genre);
         return "redirect:/getAllGenres";
     }
@@ -41,12 +44,30 @@ public class GenreController {
     public String updateGenre(@PathVariable("id") int id, Model model) {
         model.addAttribute("genre", genreService.getGenre(id));
         model.addAttribute("listOfGenres", genreService.getAll());
-        return "jsp/genreList";
+        return "jsp/genreUpdateCreate";
+    }
+
+    @PostMapping("/updateGenre/{id}")
+    public String updateGenreExec(@PathVariable("id") int id, @RequestParam String name, @RequestParam String rating) {
+        Genre genre = genreService.getGenre(id);
+        genre.setName(name);
+        genre.setRating(Integer.parseInt(rating));
+        genreService.addGenre(genre);
+        return "redirect:/getAllGenres";
     }
 
     @RequestMapping(value = "/deleteGenre/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public String deleteGenre(@PathVariable("id") int id) {
         genreService.deleteGenre(id);
-        return "redirect:/getAllTracks";
+        return "redirect:/getAllGenres";
+    }
+
+    /*
+    tracks of current genre
+     */
+    @GetMapping("/genreTracks")
+    public String getTrackOfGenre(@RequestParam String id, Model model) {
+        model.addAttribute("songs", genreService.getGenre(Integer.parseInt(id)).getTracks());
+        return "jsp/genreSongs";
     }
 }

@@ -25,10 +25,10 @@
         <div class="row">
             <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
-                    <a href="/genres" class="btn btn-light mb-2">Back</a>
+                    <a href="/getAllGenres" class="btn btn-light mb-2">Back</a>
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
+                    <a href="/getAllArtists" class="btn btn-light mb-2">Artists</a>
+                    <a href="/getAllTracks" class="btn btn-light mb-2">Songs</a>
                 </div>
             </div>
             <div class="col text-center">
@@ -36,11 +36,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="songNameId">Name</label>
-                            <input type="text" placeholder="Name" name="songName" id="songNameId" class="form-control" value="<c:out value="${genre.name}" default=""/>"/>
+                            <input type="text" placeholder="Name" name="name" id="songNameId" class="form-control" value="<c:out value="${genre.name}" default=""/>"/>
                         </div>
                         <div class="form-group col">
                             <label for="songAlbumId">Rating</label>
-                            <input type="text" placeholder="Age" name="songAlbum" id="songAlbumId" class="form-control" value="<c:out value="${genre.rating}" default=""/>"/>
+                            <input type="text" placeholder="Rating" name="rating" id="songAlbumId" class="form-control" value="<c:out value="${genre.rating}" default=""/>"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Confirm</button>

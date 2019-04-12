@@ -34,7 +34,7 @@ public class Genre{
     public Genre() {
     }
 
-    public String getTracks() {
+    /*public String getTracks() {
         String tracksNames = "";
         int tracksSize = tracks.size();
         for (int i = 0 ; i < tracksSize; ++i){
@@ -44,7 +44,16 @@ public class Genre{
             tracksNames = tracksNames.concat(tracks.get(i).getName());
         }
         return tracksNames;
+    }*/
+
+    public List<Track> getTracks() {
+        return tracks;
     }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
+    }
+
     public int getId() {
         return id;
     }
