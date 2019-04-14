@@ -27,7 +27,7 @@
                 <div class="btn-group-vertical mr-3">
                     <a href="/artists" class="btn btn-light mb-2">Back</a>
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Songs</a>
                     <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
@@ -35,12 +35,12 @@
                 <form method="post">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="songNameId">Name</label>
-                            <input type="text" placeholder="Name" name="songName" id="songNameId" class="form-control" value="<c:out value="${artist.name}" default=""/>"/>
+                            <label for="artistNameId">Name</label>
+                            <input type="text" placeholder="Name" name="name" id="artistNameId" class="form-control" value="<c:out value="${artist.name}" default=""/>"/>
                         </div>
                         <div class="form-group col">
-                            <label for="songAlbumId">Age</label>
-                            <input type="text" placeholder="Age" name="songAlbum" id="songAlbumId" class="form-control" value="<c:out value="${artist.age}" default=""/>"/>
+                            <label for="artistAgeId">Age</label>
+                            <input type="text" placeholder="Age" name="age" id="artistAgeId" class="form-control" value="<c:out value="${artist.age}" default=""/>"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Confirm</button>

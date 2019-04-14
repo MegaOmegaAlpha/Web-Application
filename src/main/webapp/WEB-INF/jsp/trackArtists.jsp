@@ -3,13 +3,12 @@
   Created by IntelliJ IDEA.
   User: bairamov-vladimir
   Date: 29.03.19
-  Time: 13:15
+  Time: 12:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
     <title>Title</title>
     <link rel="stylesheet" href="/style/style.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -27,41 +26,37 @@
 <main class="m-3">
     <div class="container-fluid text-center">
         <div class="row">
-            <div class="col-sm-">
+            <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/getAllGenres" class="btn btn-light mb-2">Back</a>
-                    <a href="/getAllTracks" class="btn btn-light mb-2">Songs</a>
-                    <a href="/getAllTracks" class="btn btn-light mb-2">Artists</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
+                    <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-5">
                 <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Album</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Artist</th>
-                        <th scope="col">Genre</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Tracks' collection</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="song" items="${songs}">
+                    <c:forEach var="artist" items="${artists}">
                         <tr>
-                            <td>${song.name}</td>
-                            <td>${song.album}</td>
-                            <td>${song.duration}</td>
-                            <td><a href="/trackArtists?id=${song.id}">Artists' collection</a></td>
-                            <td><a href="/trackGenres?id=${song.id}">Genres' collection</a></td>
-                            <td>
-                                <a href="/updateTrack/${song.id}" class="btn btn-outline-warning mr-2">Edit</a>
-                            </td>
+                            <td><c:out value="${artist.name}"/></td>
+                            <td><c:out value="${artist.age}"/></td>
+                            <td><a href="/artists/artistTracks?id=${artist.id}">Tracks' collection</a></td>
+                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/artists/artist?id=${artist.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
+            </div>
+            <div class="col">
+
             </div>
         </div>
     </div>

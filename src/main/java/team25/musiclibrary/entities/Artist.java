@@ -10,7 +10,7 @@ import java.util.List;
 public class Artist{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "name")
@@ -34,16 +34,8 @@ public class Artist{
     public Artist() {
     }
 
-    public String getTracks() {
-        String tracksNames = "";
-        int tracksSize = tracks.size();
-        for (int i = 0 ; i < tracksSize; ++i){
-            if(i > 0){
-                tracksNames += ", ";
-            }
-            tracksNames = tracksNames.concat(tracks.get(i).getName());
-        }
-        return tracksNames;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
     public int getId() {

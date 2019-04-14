@@ -2,6 +2,7 @@ package team25.musiclibrary.entities;
 
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +12,14 @@ public class Track{
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "album")
     private String album;
     @Column(name = "duration")
-    private int duration;
+    private Time duration;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -43,7 +44,7 @@ public class Track{
     public Track() {
     }
 
-    public Track(String name, String album, int duration) {
+    public Track(String name, String album, Time duration) {
         this.name = name;
         this.album = album;
         this.duration = duration;
@@ -116,11 +117,11 @@ public class Track{
         this.album = album;
     }
 
-    public int getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
 

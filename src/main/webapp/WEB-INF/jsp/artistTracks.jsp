@@ -3,14 +3,14 @@
   Created by IntelliJ IDEA.
   User: bairamov-vladimir
   Date: 29.03.19
-  Time: 12:35
+  Time: 12:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
@@ -26,37 +26,39 @@
 <main class="m-3">
     <div class="container-fluid text-center">
         <div class="row">
-            <div class="col text-right">
+            <div class="col-sm-">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
+                    <a href="/artists" class="btn btn-light mb-2">Back</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
+                    <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col">
                 <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Songs' collection</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Genre</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="genre" items="${genres}">
+                    <c:forEach var="track" items="${tracks}">
                         <tr>
-                            <td><c:out value="${genre.name}"/></td>
-                            <td><c:out value="${genre.rating}"/></td>
-                            <td><a href="/genres/genreSongs?id=${genre.id}">Songs' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/genres/genre?id=${genre.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
+                            <td>${track.name}</td>
+                            <td>${track.album}</td>
+                            <td>${track.duration}</td>
+                            <td><a href="/tracks/trackArtists?id=${track.id}">Artists' collection</a></td>
+                            <td><a href="/tracks/trackGenres?id=${track.id}">Genres' collection</a></td>
+                            <td><a href="/tracks/track?id=${track.id}" class="btn btn-outline-warning mr-2">Edit</a><a href="" class="btn btn-outline-danger">Remove</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-            </div>
-            <div class="col">
-
             </div>
         </div>
     </div>

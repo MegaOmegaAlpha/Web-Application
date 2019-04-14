@@ -46,7 +46,7 @@
             <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
                     <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Songs' collection</th>
+                        <th scope="col">Tracks' collection</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -65,13 +65,13 @@
                         <tr>
                             <td><c:out value="${artist.name}"/></td>
                             <td><c:out value="${artist.age}"/></td>
-                            <td><a href="/artists/artistSongs?id=${artist.id}">Songs' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/artists/artist?id=${artist.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
+                            <td><a href="/ad?id=${artist.id}">Tracks' collection</a></td>
+                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/artist/${artist.id}"/>">Edit</a><a href="/deleteArtist?id=${artist.id}" class="btn btn-outline-danger">Remove</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="/artists/newArtist" class="btn btn-success mb-2">Add new artist</a>
+                <a href="/addArtist" class="btn btn-success mb-2">Add new artist</a>
             </div>
             <div class="col">
 

@@ -71,23 +71,23 @@
                     </thead>
                     <tbody>
                     <%
-                        List<Track> songList = (List<Track>) request.getAttribute("listOfTracks");
-                        if (songList != null) {
-                            for (Track song : songList) {
+                        List<Track> trackList = (List<Track>) request.getAttribute("listOfTracks");
+                        if (trackList != null) {
+                            for (Track track : trackList) {
                                 out.print("<tr>");
-                                out.print("<td rowspan=\"\">" + song.getName() + "</td>");
-                                out.print("<td rowspan=\"\">" + song.getAlbum() + "</td>");
-                                out.print("<td rowspan=\"\">" + song.getDuration() + "</td>");
-                                out.print("<td rowspan=\"\"><a href=\"/songs/songArtists?id=" + song.getId() + "\">" + "Artists' collection" + "</a></td>");
-                                out.print("<td rowspan=\"\"><a href=\"/songs/songGenres?id=" + song.getId() + "\">" + "Genres' collection" + "</a></td>");
-                                out.print("<td rowspan=\"\"><a href=\"/songs/song?id=" + song.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a class=\"btn btn-outline-danger\">Remove</a></td>");
+                                out.print("<td rowspan=\"\">" + track.getName() + "</td>");
+                                out.print("<td rowspan=\"\">" + track.getAlbum() + "</td>");
+                                out.print("<td rowspan=\"\">" + track.getDuration() + "</td>");
+                                out.print("<td rowspan=\"\"><a href=\"/tracks/trackArtists?id=" + track.getId() + "\">" + "Artists' collection" + "</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/tracks/trackGenres?id=" + track.getId() + "\">" + "Genres' collection" + "</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/tracks/track?id=" + track.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a href=\"/deleteTrack?id=" + track.getId() + "\" class=\"btn btn-outline-danger\">Remove</a></td>");
                                 out.print("</tr>");
                             }
                         }
                     %>
                     </tbody>
                 </table>
-                <a href="/addTrack" class="btn btn-success mb-2">Add new song</a>
+                <a href="/addTrack" class="btn btn-success mb-2">Add new track</a>
             </div>
         </div>
     </div>

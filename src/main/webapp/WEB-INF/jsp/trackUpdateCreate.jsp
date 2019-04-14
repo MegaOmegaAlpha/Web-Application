@@ -4,12 +4,12 @@
 <%@ page import="team25.musiclibrary.entities.Artist" %>
 <%@ page import="team25.musiclibrary.entities.Genre" %>
 <%@ page import="team25.musiclibrary.entities.Track" %>
-Created by IntelliJ IDEA.
-  User: User
-  Date: 12.03.2019
-  Time: 0:35
-  To change this template use File | Settings | File Templates.
---%>
+<%--Created by IntelliJ IDEA.--%>
+  <%--User: User--%>
+  <%--Date: 12.03.2019--%>
+  <%--Time: 0:35--%>
+  <%--To change this template use File | Settings | File Templates.--%>
+<%--&ndash;%&gt;--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,7 +25,7 @@ Created by IntelliJ IDEA.
 <body>
 <main class="m-3">
     <%
-        Track song = (Track) request.getAttribute("song");
+        Track track = (Track) request.getAttribute("track");
         List<Artist> artists = (List<Artist>) request.getAttribute("artistList");
         List<Genre> genres = (List<Genre>) request.getAttribute("genreList");
     %>
@@ -33,38 +33,38 @@ Created by IntelliJ IDEA.
         <div class="row">
             <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
-                    <a href="/songs" class="btn btn-light mb-2">Back</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Back</a>
                     <a href="/" class="btn btn-light mb-2">Home</a>
                     <a href="/artists" class="btn btn-light mb-2">Artists</a>
                     <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
             <div class="col text-center">
-                <form method="post" action="/saveTrack">
+                <form method="post" action="/addTrack">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="songNameId">Title</label>
-                            <input type="text" name="songName" id="songNameId" class="form-control" value="<%=(song == null ? "" : song.getName())%>"/>
+                            <label for="trackNameId">Name</label>
+                            <input type="text" name="name" id="trackNameId" class="form-control" value="<c:out value="${track.name}" default=""/>"/>
                         </div>
                         <div class="form-group col">
-                            <label for="songAlbumId">Album</label>
-                            <input type="text" name="songAlbum" id="songAlbumId" class="form-control" value="<%=(song == null ? "" : song.getAlbum())%>"/>
+                            <label for="trackAlbumId">Album</label>
+                            <input type="text" name="album" id="trackAlbumId" class="form-control" value="<c:out value="${track.album}" default=""/>"/>
                         </div>
                         <div class="form-group col">
-                            <label for="songDurationId">Duration</label>
-                            <input type="time" name="songDuration" id="songDurationId" class="form-control" value="<%=(song == null ? "" : song.getDuration())%>"/>
+                            <label for="trackDurationId">Duration</label>
+                            <input type="time" name="duration" id="trackDurationId" class="form-control" value="<c:out value="${track.duration}" default=""/>"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col" id="artist-col-id">
-                            <label for="songArtistId">Artists</label>
+                            <label for="trackArtistId">Artists</label>
                             <div class="selector" id="selector-id">
                                 <%
-                                    if (song.getArtists() != null) {
-                                        for (Artist artistItem : song.getArtists()) {
-                                            out.print("<select name=\"songArtistIdList\" id=\"songArtistId\" class=\"form-control mb-2\"");
+                                    if (track.getArtists() != null) {
+                                        for (Artist artistItem : track.getArtists()) {
+                                            out.print("<select name=\"trackArtistIdList\" id=\"trackArtistId\" class=\"form-control mb-2\"");
                                             for (Artist artist : artists) {
-                                                String selected = song != null && artistItem.getId() == artist.getId() ? "selected" : "";
+                                                String selected = track != null && artistItem.getId() == artist.getId() ? "selected" : "";
                                                 out.print("<option " + selected + " value=\"" + artist.getId() + "\">");
                                                 out.print(artist.getName() + ", " + artist.getAge());
                                                 out.print("</option>");
@@ -77,14 +77,14 @@ Created by IntelliJ IDEA.
                             <button type="button" class="btn btn-success" onclick="addField(this)" name="0">+</button>
                         </div>
                         <div class="form-group col">
-                            <label for="songGenreId">Genre</label>
+                            <label for="trackGenreId">Genre</label>
                             <div class="selector">
                                 <%
-                                    if (song.getGenres() != null) {
-                                        for (Genre genreItem : song.getGenres()) {
-                                            out.print("<select type=\"text\" name=\"songGenreIdList\" id=\"songGenreId\" class=\"form-control mb-2\">");
+                                    if (track.getGenres() != null) {
+                                        for (Genre genreItem : track.getGenres()) {
+                                            out.print("<select type=\"text\" name=\"trackGenreIdList\" id=\"trackGenreId\" class=\"form-control mb-2\">");
                                             for (Genre genre : genres) {
-                                                String selected = song != null && genreItem.getId() == genre.getId() ? "selected" : "";
+                                                String selected = track != null && genreItem.getId() == genre.getId() ? "selected" : "";
                                                 out.print("<option " + selected + " value=\"" + genre.getId() + "\">");
                                                 out.print(genre.getName());
                                                 out.print("</option>");

@@ -3,12 +3,13 @@
   Created by IntelliJ IDEA.
   User: bairamov-vladimir
   Date: 29.03.19
-  Time: 12:59
+  Time: 13:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>Title</title>
     <title>Title</title>
     <link rel="stylesheet" href="/style/style.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -29,9 +30,9 @@
             <div class="col-sm-">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/artists" class="btn btn-light mb-2">Back</a>
-                    <a href="/songs" class="btn btn-light mb-2">Songs</a>
-                    <a href="/genres" class="btn btn-light mb-2">Genres</a>
+                    <a href="/genres" class="btn btn-light mb-2">Back</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
+                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
                 </div>
             </div>
             <div class="col">
@@ -47,14 +48,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="song" items="${songs}">
+                    <c:forEach var="track" items="${tracks}">
                         <tr>
-                            <td>${song.name}</td>
-                            <td>${song.album}</td>
-                            <td>${song.duration}</td>
-                            <td><a href="/songs/songArtists?id=${song.id}">Artists' collection</a></td>
-                            <td><a href="/songs/songGenres?id=${song.id}">Genres' collection</a></td>
-                            <td><a href="/songs/song?id=${song.id}" class="btn btn-outline-warning mr-2">Edit</a><a href="" class="btn btn-outline-danger">Remove</a></td>
+                            <td>${track.name}</td>
+                            <td>${track.album}</td>
+                            <td>${track.duration}</td>
+                            <td><a href="/trackArtists?id=${track.id}">Artists' collection</a></td>
+                            <td><a href="/trackGenres?id=${track.id}">Genres' collection</a></td>
+                            <td>
+                                <a href="/updateTrack/${track.id}" class="btn btn-outline-warning mr-2">Edit</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

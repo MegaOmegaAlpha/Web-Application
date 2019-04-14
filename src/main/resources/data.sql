@@ -1,6 +1,3 @@
-alter table track change id id serial;
-alter table genre change id id serial;
-alter table artist change id id serial;
 insert  into track (name, album,  duration) VALUES ('Natural blues', 'Hotel Ambient',  356);
 insert  into track (name, album,  duration) VALUES ('Track2', 'Hotel Ambient',  226);
 insert  into track (name, album,  duration) VALUES ('Track3', 'Left',  12);

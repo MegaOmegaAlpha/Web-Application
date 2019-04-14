@@ -31,9 +31,9 @@
                 <h2 class="card-title">This is our simple web application</h2>
                 <p class="card-text">Here you can do what you want</p>
                 <div class="btn-group-vertical">
-                    <a href="/getAllTracks" class="btn btn-light">Songs</a>
-                    <a href="/getAllArtists" class="btn btn-light">Artists</a>
-                    <a href="/getAllGenres" class="btn btn-light">Genres</a>
+                    <a href="/tracks" class="btn btn-light">Tracks</a>
+                    <a href="/artists" class="btn btn-light">Artists</a>
+                    <a href="/genres" class="btn btn-light">Genres</a>
                     <a href="" class="btn btn-light">Hard query test</a>
                 </div>
             </div>

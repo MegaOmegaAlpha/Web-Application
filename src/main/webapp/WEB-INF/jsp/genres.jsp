@@ -46,8 +46,8 @@
             <div class="col text-right">
                 <div class="btn-group-vertical mr-3">
                     <a href="/" class="btn btn-light mb-2">Home</a>
-                    <a href="/getAllArtists" class="btn btn-light mb-2">Artists</a>
-                    <a href="/getAllTracks" class="btn btn-light mb-2">Songs</a>
+                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
+                    <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
                 </div>
             </div>
             <div class="col-5">
@@ -56,7 +56,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Rating</th>
-                        <th scope="col">Songs' collection</th>
+                        <th scope="col">Tracks' collection</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -65,10 +65,10 @@
                         <tr>
                             <td><c:out value="${genre.name}"/></td>
                             <td><c:out value="${genre.rating}"/></td>
-                            <td><a href="/genreTracks?id=${genre.id}">Songs' collection</a></td>
+                            <td><a href="/genreTracks?id=${genre.id}">Tracks' collection</a></td>
                             <td>
                                 <a class="btn btn-outline-warning mr-2" href="/updateGenre/${genre.id}">Edit</a>
-                                <a class="btn btn-outline-danger" href="/deleteGenre/${genre.id}">Remove</a>
+                                <a class="btn btn-outline-danger" href="/deleteGenre?id=${genre.id}">Remove</a>
                             </td>
                         </tr>
                     </c:forEach>
