@@ -29,6 +29,23 @@
         List<Artist> artists = (List<Artist>) request.getAttribute("artistList");
         List<Genre> genres = (List<Genre>) request.getAttribute("genreList");
     %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <h1>${operation} track</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="col text-right">
@@ -40,15 +57,15 @@
                 </div>
             </div>
             <div class="col text-center">
-                <form method="post" action="/addTrack">
+                <form method="post"">
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="trackNameId">Name</label>
-                            <input type="text" name="name" id="trackNameId" class="form-control" value="<c:out value="${track.name}" default=""/>"/>
+                            <input type="text" name="name" id="trackNameId" class="form-control" value="<c:out value="${track.name}" default=""/>" placeholder="Name"/>
                         </div>
                         <div class="form-group col">
                             <label for="trackAlbumId">Album</label>
-                            <input type="text" name="album" id="trackAlbumId" class="form-control" value="<c:out value="${track.album}" default=""/>"/>
+                            <input type="text" name="album" id="trackAlbumId" class="form-control" value="<c:out value="${track.album}" default=""/>" placeholder="Album"/>
                         </div>
                         <div class="form-group col">
                             <label for="trackDurationId">Duration</label>
@@ -62,7 +79,7 @@
                                 <%
                                     if (track.getArtists() != null) {
                                         for (Artist artistItem : track.getArtists()) {
-                                            out.print("<select name=\"trackArtistIdList\" id=\"trackArtistId\" class=\"form-control mb-2\"");
+                                            out.print("<select name=\"artistIdList\" id=\"trackArtistId\" class=\"form-control mb-2\"");
                                             for (Artist artist : artists) {
                                                 String selected = track != null && artistItem.getId() == artist.getId() ? "selected" : "";
                                                 out.print("<option " + selected + " value=\"" + artist.getId() + "\">");
@@ -82,7 +99,7 @@
                                 <%
                                     if (track.getGenres() != null) {
                                         for (Genre genreItem : track.getGenres()) {
-                                            out.print("<select type=\"text\" name=\"trackGenreIdList\" id=\"trackGenreId\" class=\"form-control mb-2\">");
+                                            out.print("<select type=\"text\" name=\"genreIdList\" id=\"trackGenreId\" class=\"form-control mb-2\">");
                                             for (Genre genre : genres) {
                                                 String selected = track != null && genreItem.getId() == genre.getId() ? "selected" : "";
                                                 out.print("<option " + selected + " value=\"" + genre.getId() + "\">");

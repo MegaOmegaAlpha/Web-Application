@@ -36,15 +36,24 @@ public class ArtistController {
     }
     @GetMapping(value = "/addArtist", headers = "Accept=application/json")
     public String addArtist(Model model){
-        model.addAttribute("artist", new Artist());
+        model.addAttribute("operation", "Create");
         return "jsp/artistUpdateCreate";
     }
 
     @GetMapping(value = "/updateArtist", headers = "Accept=application/json")
     public String updateArtist(@RequestParam int id, Model model) {
         model.addAttribute("artist", artistService.getArtist(id));
-        model.addAttribute("listOfArtists", artistService.getAll());
-        return "jsp/artists";
+        model.addAttribute("operation", "Update");
+        return "jsp/artistUpdateCreate";
+    }
+
+    @PostMapping("updateArtist")
+    public String updateArtistExec(@RequestParam int id, String name, String age) {
+        Artist artist = artistService.getArtist(id);
+        artist.setName(name);
+        artist.setAge(Integer.parseInt(age));
+        artistService.addArtist(artist);
+        return "redirect:/artists";
     }
 
     @GetMapping(value = "/deleteArtist", headers = "Accept=application/json")
@@ -53,15 +62,11 @@ public class ArtistController {
         return "redirect:/artists";
     }
 
-    @GetMapping(value = "/artists/artistTracks", headers = "Accept=application/json")
+    @GetMapping(value = "/artistTracks", headers = "Accept=application/json")
     public String getArtistSongs(@RequestParam int id, Model model) {
-        model.addAttribute("track", new Track());
-        model.addAttribute("tracks", artistService.getArtist(id).getTracks());
+        Artist artist;
+        model.addAttribute("tracks", (artist = artistService.getArtist(id)).getTracks());
+        model.addAttribute("artist", artist);
         return "jsp/artistTracks";
-    }
-    @GetMapping(value = "/artists/artist", headers = "Accept=application/json")
-    public String editArtistById(@RequestParam int id, Model model) {
-        model.addAttribute("artist", artistService.getArtist(id));
-        return "jsp/artistUpdateCreate";
     }
 }

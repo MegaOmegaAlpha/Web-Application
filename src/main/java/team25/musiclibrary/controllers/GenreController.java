@@ -30,6 +30,7 @@ public class GenreController {
 
     @GetMapping("/addGenre")
     public String addGenrePage(Model model) {
+        model.addAttribute("operation", "Create");
         return "jsp/genreUpdateCreate";
     }
 
@@ -44,6 +45,7 @@ public class GenreController {
     public String updateGenre(@PathVariable("id") int id, Model model) {
         model.addAttribute("genre", genreService.getGenre(id));
         model.addAttribute("listOfGenres", genreService.getAll());
+        model.addAttribute("operation", "Update");
         return "jsp/genreUpdateCreate";
     }
 
@@ -65,9 +67,11 @@ public class GenreController {
     /*
     tracks of current genre
      */
-    @GetMapping("/genres/genreTracks")
+    @GetMapping("/genreTracks")
     public String getTrackOfGenre(@RequestParam int id, Model model) {
-        model.addAttribute("tracks", genreService.getGenre(id).getTracks());
+        Genre genre;
+        model.addAttribute("tracks", (genre = genreService.getGenre(id)).getTracks());
+        model.addAttribute("genre", genre);
         return "jsp/genreTracks";
     }
 

@@ -30,6 +30,20 @@
 </head>
 <body class="m-3">
 <main>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <h1>Tracks data</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -80,7 +94,7 @@
                                 out.print("<td rowspan=\"\">" + track.getDuration() + "</td>");
                                 out.print("<td rowspan=\"\"><a href=\"/tracks/trackArtists?id=" + track.getId() + "\">" + "Artists' collection" + "</a></td>");
                                 out.print("<td rowspan=\"\"><a href=\"/tracks/trackGenres?id=" + track.getId() + "\">" + "Genres' collection" + "</a></td>");
-                                out.print("<td rowspan=\"\"><a href=\"/tracks/track?id=" + track.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a href=\"/deleteTrack?id=" + track.getId() + "\" class=\"btn btn-outline-danger\">Remove</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/updateTrack/" + track.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a href=\"/deleteTrack?id=" + track.getId() + "\" class=\"btn btn-outline-danger\">Remove</a></td>");
                                 out.print("</tr>");
                             }
                         }

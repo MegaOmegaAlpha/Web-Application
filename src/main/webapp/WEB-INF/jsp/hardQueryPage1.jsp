@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: bairamov-vladimir
-  Date: 29.03.19
-  Time: 12:17
+  Date: 12.04.19
+  Time: 0:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,15 +22,33 @@
         }
     </style>
 </head>
-<body>
-<main class="m-3">
+<body class="m-3">
+<main>
     <div class="container-fluid">
         <div class="row">
             <div class="col">
 
             </div>
             <div class="col text-center">
-                <h1>"${track.name}"'s collection of artists</h1>
+                <h1>Here you can find any track by artist's age</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <form class="form-inline">
+                    <input type="text" name="ageMin" placeholder="Min age" class="form-control mb-2 mr-sm-2" required/>
+                    <input type="text" name="ageMax" placeholder="Max age" class="form-control mb-2 mr-sm-2" required/>
+                    <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
+                </form>
             </div>
             <div class="col">
 
@@ -39,37 +57,41 @@
     </div>
     <div class="container-fluid text-center">
         <div class="row">
-            <div class="col text-right">
+            <div class="col-sm- text-right">
                 <div class="btn-group-vertical mr-3">
+                    <a href="/genres" class="btn btn-light mb-2">Back</a>
                     <a href="/" class="btn btn-light mb-2">Home</a>
+                    <a href="/artists" class="btn btn-light mb-2">Artists</a>
                     <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
-                    <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col">
                 <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Tracks' collection</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Genre</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="artist" items="${artists}">
+                    <c:forEach var="track" items="${listOfTracks}">
                         <tr>
-                            <td><c:out value="${artist.name}"/></td>
-                            <td><c:out value="${artist.age}"/></td>
-                            <td><a href="/artistTracks?id=${artist.id}">Tracks' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="/updateArtist?id=${artist.id}">Edit</a></td>
+                            <td>${track.name}</td>
+                            <td>${track.album}</td>
+                            <td>${track.duration}</td>
+                            <td><a href="/tracks/trackArtists?id=${track.id}">Artists' collection</a></td>
+                            <td><a href="/tracks/trackGenres?id=${track.id}">Genres' collection</a></td>
+                            <td>
+                                <a class="btn btn-outline-warning mr-2" href="/updateTrack/${track.id}">Edit</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-            </div>
-            <div class="col">
-
             </div>
         </div>
     </div>

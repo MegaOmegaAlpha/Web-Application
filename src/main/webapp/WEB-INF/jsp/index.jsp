@@ -34,7 +34,8 @@
                     <a href="/tracks" class="btn btn-light">Tracks</a>
                     <a href="/artists" class="btn btn-light">Artists</a>
                     <a href="/genres" class="btn btn-light">Genres</a>
-                    <a href="" class="btn btn-light">Hard query test</a>
+                    <a href="/findByArtistAge?ageMin=0&ageMax=0" class="btn btn-light">Hard query #1 (by artist age)</a>
+                    <a href="/findAllByGenres_RatingLike?rating=0" class="btn btn-light">Hard query #2 (by genre rating)</a>
                 </div>
             </div>
             <div class="card-footer text-muted">

@@ -24,12 +24,26 @@
 </head>
 <body>
 <main class="m-3">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <h1>Genres data</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="col">
 
             </div>
-            <div class="col-5">
+            <div class="col text-center">
                 <form class="form-inline">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="rating" placeholder="Rating" class="form-control mb-2 mr-sm-2"/>

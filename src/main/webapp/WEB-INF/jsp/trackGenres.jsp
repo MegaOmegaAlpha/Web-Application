@@ -24,6 +24,19 @@
 </head>
 <body>
 <main class="m-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <h1>"${track.name}"'s collection of genres</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
     <div class="container-fluid text-center">
         <div class="row">
             <div class="col text-right">
@@ -48,8 +61,8 @@
                         <tr>
                             <td><c:out value="${genre.name}"/></td>
                             <td><c:out value="${genre.rating}"/></td>
-                            <td><a href="/genres/genreTracks?id=${genre.id}">Tracks' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="<c:url value="/genres/genre?id=${genre.id}"/>">Edit</a><a class="btn btn-outline-danger">Remove</a></td>
+                            <td><a href="/genreTracks?id=${genre.id}">Tracks' collection</a></td>
+                            <td><a class="btn btn-outline-warning mr-2" href="/updateGenre/${genre.id}">Edit</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

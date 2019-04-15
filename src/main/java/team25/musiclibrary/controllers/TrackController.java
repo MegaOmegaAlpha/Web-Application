@@ -13,6 +13,7 @@ import team25.musiclibrary.service.GenreService;
 import team25.musiclibrary.service.TrackService;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,15 +43,22 @@ public class TrackController {
 
     @PostMapping(value = "/addTrack")
     public String addTrack(@RequestParam String name, @RequestParam String album,
-                           @RequestParam String duration){
-        Track track = new Track(name, album, Time.valueOf("00:".concat(duration)));
+                           @RequestParam String duration, @RequestParam List<String> artistIdList,
+                           @RequestParam List<String> genreIdList){
+        Track track = new Track(name, album, Time.valueOf(duration));
+        for (String id : artistIdList) {
+            track.getArtists().add(artistService.getArtist(Integer.parseInt(id)));
+        }
+        for (String id : genreIdList) {
+            track.getGenres().add(genreService.getGenre(Integer.parseInt(id)));
+        }
         trackService.addTrack(track);
         return "redirect:/tracks";
     }
 
     @GetMapping(value = "/addTrack")
     public String addTrackPage(Model model) {
-        model.addAttribute("track", new Track());
+        model.addAttribute("operation", "Create");
         return "jsp/trackUpdateCreate";
     }
 
@@ -63,12 +71,30 @@ public class TrackController {
     @GetMapping(value = "/updateTrack/{id}", headers = "Accept=application/json")
     public String updateTrack(@PathVariable("id") int id, Model model) {
         model.addAttribute("track", trackService.getTrack(id));
-        model.addAttribute("listOfTracks", trackService.getAll());
+        model.addAttribute("artistList", artistService.getAll());
+        model.addAttribute("genreList", genreService.getAll());
+        model.addAttribute("operation", "Update");
         return "jsp/trackUpdateCreate";
     }
 
-    @PostMapping(value= "/saveTrack", headers = "Accept=application/json")
-    public String saveTrack(@ModelAttribute("track") Track track){
+    @PostMapping(value= "/updateTrack/{id}", headers = "Accept=application/json")
+    public String saveTrack(@PathVariable("id") int id, @RequestParam String name,
+                            @RequestParam String album, @RequestParam String duration,
+                            @RequestParam List<String> artistIdList, @RequestParam List<String> genreIdList){
+        Track track = trackService.getTrack(id);
+        track.setName(name);
+        track.setAlbum(album);
+        track.setDuration(Time.valueOf(duration));
+        List<Artist> artistList = new ArrayList<>();
+        for (String artistId : artistIdList) {
+            artistList.add(artistService.getArtist(Integer.parseInt(artistId)));
+        }
+        track.setArtists(artistList);
+        List<Genre> genreList = new ArrayList<>();
+        for (String genreId : genreIdList) {
+            genreList.add(genreService.getGenre(Integer.parseInt(genreId)));
+        }
+        track.setGenres(genreList);
         trackService.updateTrack(track);
         return "redirect:/tracks";
     }
@@ -79,29 +105,31 @@ public class TrackController {
         return "redirect:/tracks";
     }
 
-    @GetMapping(value = "/findByArtistAge/{from},{to}", headers = "Accept=application/json")
-    public String findByArtistAge(@PathVariable("from") Integer from, @PathVariable("to") Integer to,  Model model){
-        model.addAttribute("track", new Track());
-        model.addAttribute("listOfTracks", trackService.findAllByArtists_AgeBetween(from, to));
-        return "jsp/trackList";
+    @GetMapping(value = "/findByArtistAge", headers = "Accept=application/json")
+    public String findByArtistAge(@RequestParam int ageMin, @RequestParam int ageMax,  Model model){
+        //model.addAttribute("track", new Track());
+        model.addAttribute("listOfTracks", trackService.findAllByArtists_AgeBetween(ageMin, ageMax));
+        return "jsp/hardQueryPage1";
     }
-    @GetMapping(value = "/findAllByGenres_RatingLike/{rating}", headers = "Accept=application/json")
-    public String findAllByGenres_RatingLike(@PathVariable("rating") Integer rating, Model model){
-        model.addAttribute("track", new Track());
+    @GetMapping(value = "/findAllByGenres_RatingLike", headers = "Accept=application/json")
+    public String findAllByGenres_RatingLike(@RequestParam Integer rating, Model model){
+        //model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", trackService.findAllByGenres_RatingLike(rating));
-        return "jsp/trackList";
+        return "jsp/hardQueryPage2";
     }
     @GetMapping(value = "/tracks/trackArtists", headers = "Accept=application/json")
     public String getTrackArtists(@RequestParam int id, Model model){
-        List<Artist> artistList = trackService.getTrack(id).getArtists();
-        model.addAttribute("artist", new Artist());
+        Track track;
+        List<Artist> artistList = (track = trackService.getTrack(id)).getArtists();
+        model.addAttribute("track", track);
         model.addAttribute("artists", artistList);
         return "jsp/trackArtists";
     }
     @GetMapping(value = "/tracks/trackGenres", headers = "Accept=application/json")
     public String getTrackGenres(@RequestParam int id, Model model){
-        List<Genre> genreList = trackService.getTrack(id).getGenres();
-        model.addAttribute("genre", new Genre());
+        Track track;
+        List<Genre> genreList = (track = trackService.getTrack(id)).getGenres();
+        model.addAttribute("track", track);
         model.addAttribute("genres", genreList);
         return "jsp/trackGenres";
     }

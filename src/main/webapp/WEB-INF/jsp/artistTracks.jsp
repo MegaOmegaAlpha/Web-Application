@@ -24,6 +24,20 @@
 </head>
 <body>
 <main class="m-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col text-center">
+                <h1>${artist.name}'s collection of tracks</h1>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+    <hr>
     <div class="container-fluid text-center">
         <div class="row">
             <div class="col-sm-">
@@ -54,7 +68,7 @@
                             <td>${track.duration}</td>
                             <td><a href="/tracks/trackArtists?id=${track.id}">Artists' collection</a></td>
                             <td><a href="/tracks/trackGenres?id=${track.id}">Genres' collection</a></td>
-                            <td><a href="/tracks/track?id=${track.id}" class="btn btn-outline-warning mr-2">Edit</a><a href="" class="btn btn-outline-danger">Remove</a></td>
+                            <td><a href="/updateTrack/${track.id}" class="btn btn-outline-warning mr-2">Edit</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

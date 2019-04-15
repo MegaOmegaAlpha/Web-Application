@@ -21,6 +21,18 @@
 </head>
 <body>
 <main class="m-3">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col text-center">
+            <h1><c:out value="${operation}"/> genre</h1>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="col text-right">
