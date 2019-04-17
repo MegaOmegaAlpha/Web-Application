@@ -1,24 +1,33 @@
 package team25.musiclibrary.entities;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "track")
 @Table(name = "track", schema = "music_store", catalog = "")
-public class Track{
+@XStreamAlias("Track")
+public class Track implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XStreamAlias("id")
     private int id;
     @Column(name = "name")
+    @XStreamAlias("name")
     private String name;
     @Column(name = "album")
+    @XStreamAlias("album")
     private String album;
     @Column(name = "duration")
+    @XStreamAlias("duration")
     private Time duration;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -29,6 +38,7 @@ public class Track{
     @JoinTable(name = "artist_track",
             joinColumns = { @JoinColumn(name = "track_id") },
             inverseJoinColumns = { @JoinColumn(name = "artist_id") })
+    @XStreamOmitField
     private List<Artist> artists = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -39,6 +49,7 @@ public class Track{
     @JoinTable(name = "genre_track",
             joinColumns = { @JoinColumn(name = "track_id") },
             inverseJoinColumns = { @JoinColumn(name = "genre_id") })
+    @XStreamOmitField
     private List<Genre> genres = new ArrayList<>();
 
     public Track() {

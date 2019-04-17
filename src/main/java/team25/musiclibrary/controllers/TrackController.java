@@ -1,6 +1,7 @@
 package team25.musiclibrary.controllers;
 
 
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +10,14 @@ import team25.musiclibrary.entities.Artist;
 import team25.musiclibrary.entities.Genre;
 import team25.musiclibrary.entities.Track;
 import team25.musiclibrary.service.ArtistService;
+import team25.musiclibrary.service.DownloadService;
 import team25.musiclibrary.service.GenreService;
 import team25.musiclibrary.service.TrackService;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,6 +138,29 @@ public class TrackController {
         model.addAttribute("track", track);
         model.addAttribute("genres", genreList);
         return "jsp/trackGenres";
+    }
+
+    @GetMapping("/downloadTrack")
+    public void downloadTrack(@RequestParam int id, HttpServletResponse response) {
+        Track track = trackService.getTrack(id);
+        String fileName = DownloadService.downloadTrack(track);
+        response.setContentType("text/plain");
+        response.setHeader("Content-Disposition",
+                "attachment;filename=" + fileName);
+        int read;
+        try (InputStream inputStream = new FileInputStream(new File(fileName));
+             OutputStream outputStream = response.getOutputStream()) {
+            byte[] bytes = new byte[1024];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            outputStream.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 

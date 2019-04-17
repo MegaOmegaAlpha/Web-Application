@@ -94,7 +94,10 @@
                                 out.print("<td rowspan=\"\">" + track.getDuration() + "</td>");
                                 out.print("<td rowspan=\"\"><a href=\"/tracks/trackArtists?id=" + track.getId() + "\">" + "Artists' collection" + "</a></td>");
                                 out.print("<td rowspan=\"\"><a href=\"/tracks/trackGenres?id=" + track.getId() + "\">" + "Genres' collection" + "</a></td>");
-                                out.print("<td rowspan=\"\"><a href=\"/updateTrack/" + track.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" + "</a><a href=\"/deleteTrack?id=" + track.getId() + "\" class=\"btn btn-outline-danger\">Remove</a></td>");
+                                out.print("<td rowspan=\"\"><a href=\"/updateTrack/" + track.getId() + "\" class=\"btn btn-outline-warning mr-2\">" + "Edit" +
+                                        "</a><a href=\"/deleteTrack?id=" + track.getId() + "\" class=\"btn btn-outline-danger mr-2\">Remove</a>" +
+                                        "<a href=\"/downloadTrack?id=" + track.getId() + "\" class=\"btn btn-outline-success\">Download</a>" +
+                                        "</td>");
                                 out.print("</tr>");
                             }
                         }
