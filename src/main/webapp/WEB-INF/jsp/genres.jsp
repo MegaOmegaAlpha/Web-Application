@@ -44,7 +44,7 @@
 
             </div>
             <div class="col text-center">
-                <form class="form-inline">
+                <form class="form-inline" action="/searchGenre">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="rating" placeholder="Rating" class="form-control mb-2 mr-sm-2"/>
                     <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>

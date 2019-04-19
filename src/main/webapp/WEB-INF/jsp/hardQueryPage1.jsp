@@ -43,7 +43,7 @@
             <div class="col">
 
             </div>
-            <div class="col text-center">
+            <div class="col-5 text-center">
                 <form class="form-inline">
                     <input type="text" name="ageMin" placeholder="Min age" class="form-control mb-2 mr-sm-2" required/>
                     <input type="text" name="ageMax" placeholder="Max age" class="form-control mb-2 mr-sm-2" required/>

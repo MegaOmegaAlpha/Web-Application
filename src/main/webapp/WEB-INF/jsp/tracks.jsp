@@ -50,10 +50,10 @@
 
             </div>
             <div class="col- text-center">
-                <form class="form-inline">
+                <form class="form-inline" action="/searchTrack">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="album" placeholder="Album" class="form-control mb-2 mr-sm-2"/>
-                    <input type="time" name="duration" placeholder="Duration" class="form-control mb-2 mr-sm-2"/>
+                    <input type="time" step="1" name="duration" placeholder="Duration" class="form-control mb-2 mr-sm-2"/>
                     <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
                 </form>
             </div>

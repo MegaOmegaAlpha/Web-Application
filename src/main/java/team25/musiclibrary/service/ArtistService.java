@@ -30,4 +30,9 @@ public class ArtistService {
     public void deleteArtist(int id){
         artistDAO.deleteById(id);
     }
+
+    @Transactional
+    public List<Artist> findByParameters(String name, int age) {
+        return artistDAO.findAllByNameOrAge(name, age);
+    }
 }

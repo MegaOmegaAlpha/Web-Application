@@ -23,6 +23,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,6 +147,19 @@ public class TrackController {
         model.addAttribute("track", track);
         model.addAttribute("genres", genreList);
         return "jsp/trackGenres";
+    }
+
+    @GetMapping("/searchTrack")
+    public String searchTrack(@RequestParam String name, @RequestParam String album,
+                            @RequestParam String duration, Model model) {
+        if (!name.equals("") || !album.equals("") || !duration.equals("")) {
+            List<Track> tracks = trackService.findByParameters(name, album, Time.valueOf(duration.equals("") ?
+                    "00:00:00" : duration));
+            model.addAttribute("listOfTracks", tracks);
+        } else {
+            model.addAttribute("listOfTracks", trackService.getAll());
+        }
+        return "jsp/tracks";
     }
 
     @GetMapping("/downloadTrack")

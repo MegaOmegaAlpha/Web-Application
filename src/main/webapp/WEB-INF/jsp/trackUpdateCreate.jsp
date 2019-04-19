@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group col">
                             <label for="trackDurationId">Duration</label>
-                            <input type="time" step="1" name="duration" id="trackDurationId" class="form-control" value="<c:out value="${track.duration}" default=""/>"/>
+                            <input type="time" step="1" name="duration" id="trackDurationId" class="form-control" value="${track.duration}"/>
                         </div>
                     </div>
                     <div class="form-row">

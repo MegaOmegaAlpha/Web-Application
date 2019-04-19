@@ -75,5 +75,15 @@ public class GenreController {
         return "jsp/genreTracks";
     }
 
+    @GetMapping("/searchGenre")
+    public String searchGenre(@RequestParam String name, @RequestParam String rating, Model model) {
+        if (!name.equals("") || !rating.equals("")) {
+            model.addAttribute("listOfGenres", genreService.findByParameters(name, (rating.equals("") ?
+                    0 : Integer.parseInt(rating))));
+        } else {
+            model.addAttribute("listOfGenres", genreService.getAll());
+        }
+        return "jsp/genres";
+    }
 
 }

@@ -31,4 +31,9 @@ public class GenreService {
     public void deleteGenre(int id){
         genreDAO.deleteById(id);
     }
+
+    @Transactional
+    public List<Genre> findByParameters(String name, int rating) {
+        return genreDAO.findAllByNameOrRating(name, rating);
+    }
 }

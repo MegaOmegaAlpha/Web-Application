@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import team25.musiclibrary.entities.Track;
 
+import java.sql.Time;
 import java.util.List;
 
 @Repository
@@ -23,4 +24,6 @@ public interface TrackDAO extends CrudRepository<Track, Integer> {
             "ON gt.genre_id = g.id " +
             "WHERE g.rating = ?1", nativeQuery = true   )
     List<Track> findAllByGenres_RatingLike( Integer rating);
+
+    List<Track> findAllByNameOrAlbumOrDuration(String name, String album, Time duration);
 }

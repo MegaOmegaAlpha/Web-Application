@@ -1,5 +1,6 @@
 package team25.musiclibrary.service;
 
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,10 @@ public class TrackService {
     @Transactional
     public List<Track> findAllByGenres_RatingLike(Integer rating){
         return trackDAO.findAllByGenres_RatingLike(rating);
+    }
+
+    @Transactional
+    public List<Track> findByParameters(String name, String album, Time duration) {
+        return trackDAO.findAllByNameOrAlbumOrDuration(name, album, duration);
     }
 }

@@ -69,4 +69,15 @@ public class ArtistController {
         model.addAttribute("artist", artist);
         return "jsp/artistTracks";
     }
+
+    @GetMapping("/searchArtist")
+    public String searchArtist(@RequestParam String name, @RequestParam String age, Model model) {
+        if (!name.equals("") || !age.equals("")) {
+            model.addAttribute("listOfArtists", artistService.findByParameters(name, age.equals("") ?
+                    0 : Integer.parseInt(age)));
+        } else {
+            model.addAttribute("listOfArtists", artistService.getAll());
+        }
+        return "jsp/artists";
+    }
 }
