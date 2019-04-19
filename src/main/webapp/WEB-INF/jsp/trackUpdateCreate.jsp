@@ -28,6 +28,7 @@
         Track track = (Track) request.getAttribute("track");
         List<Artist> artists = (List<Artist>) request.getAttribute("artistList");
         List<Genre> genres = (List<Genre>) request.getAttribute("genreList");
+        String operation = (String) request.getAttribute("operation");
     %>
     <div class="container">
         <div class="row">
@@ -57,19 +58,19 @@
                 </div>
             </div>
             <div class="col text-center">
-                <form method="post"">
+                <form method="post">
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="trackNameId">Name</label>
-                            <input type="text" name="name" id="trackNameId" class="form-control" value="<c:out value="${track.name}" default=""/>" placeholder="Name"/>
+                            <input type="text" name="name" id="trackNameId" required="required" class="form-control" value="<c:out value="${track.name}" default=""/>" placeholder="Name"/>
                         </div>
                         <div class="form-group col">
                             <label for="trackAlbumId">Album</label>
-                            <input type="text" name="album" id="trackAlbumId" class="form-control" value="<c:out value="${track.album}" default=""/>" placeholder="Album"/>
+                            <input type="text" name="album" id="trackAlbumId" required="required" class="form-control" value="<c:out value="${track.album}" default=""/>" placeholder="Album"/>
                         </div>
                         <div class="form-group col">
                             <label for="trackDurationId">Duration</label>
-                            <input type="time" name="duration" id="trackDurationId" class="form-control" value="<c:out value="${track.duration}" default=""/>"/>
+                            <input type="time" step="1" name="duration" id="trackDurationId" class="form-control" value="<c:out value="${track.duration}" default=""/>"/>
                         </div>
                     </div>
                     <div class="form-row">
@@ -89,6 +90,16 @@
                                             out.print("</select>");
                                         }
                                     }
+                                    if(operation.equals("Create")){
+                                        out.print("<select name=\"artistIdList\" id=\"trackArtistId\" class=\"form-control mb-2\"");
+                                        for (Artist artist : artists) {
+
+                                            out.print("<option \"\" value=\"" + artist.getId() + "\">");
+                                            out.print(artist.getName() + ", " + artist.getAge());
+                                            out.print("</option>");
+                                        }
+                                        out.print("</select>");
+                                    }
                                 %>
                             </div>
                             <button type="button" class="btn btn-success" onclick="addField(this)" name="0">+</button>
@@ -103,11 +114,20 @@
                                             for (Genre genre : genres) {
                                                 String selected = track != null && genreItem.getId() == genre.getId() ? "selected" : "";
                                                 out.print("<option " + selected + " value=\"" + genre.getId() + "\">");
-                                                out.print(genre.getName());
+                                                out.print(genre.getName() + "," + genre.getRating());
                                                 out.print("</option>");
                                             }
                                             out.print("</select>");
                                         }
+                                    }
+                                    if(operation.equals("Create")){
+                                        out.print("<select type=\"text\" name=\"genreIdList\" id=\"trackGenreId\" class=\"form-control mb-2\">");
+                                        for (Genre genre : genres) {
+                                            out.print("<option \"\" value=\"" + genre.getId() + "\">");
+                                            out.print(genre.getName() + "," + genre.getRating());
+                                            out.print("</option>");
+                                        }
+                                        out.print("</select>");
                                     }
                                 %>
                             </div>

@@ -2,6 +2,7 @@ package team25.musiclibrary.controllers;
 
 
 import com.sun.deploy.net.HttpResponse;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,7 @@ public class TrackController {
     @GetMapping(value = "/tracks", headers = "Accept=application/json")
     public String getTracks(Model model) {
         Iterable<Track> listOfTracks = trackService.getAll();
+        System.out.println(trackService.getTrack(1).getDuration());
         model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", listOfTracks);
         return "jsp/tracks";
@@ -64,6 +69,9 @@ public class TrackController {
 
     @GetMapping(value = "/addTrack")
     public String addTrackPage(Model model) {
+        model.addAttribute("track", new Track());
+        model.addAttribute("artistList", artistService.getAll());
+        model.addAttribute("genreList", genreService.getAll());
         model.addAttribute("operation", "Create");
         return "jsp/trackUpdateCreate";
     }
