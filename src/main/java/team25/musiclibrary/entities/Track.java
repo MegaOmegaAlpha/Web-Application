@@ -18,7 +18,7 @@ public class Track implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @XStreamAlias("id")
+    @XStreamOmitField
     private int id;
     @Column(name = "name")
     @XStreamAlias("name")
@@ -51,6 +51,30 @@ public class Track implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "genre_id") })
     @XStreamOmitField
     private List<Genre> genres = new ArrayList<>();
+
+    @Transient
+    @XStreamAlias("Artists")
+    private List<ArtistTmp> artistTmps;
+
+    @Transient
+    @XStreamAlias("Genres")
+    private List<GenreTmp> genreTmps;
+
+    public List<ArtistTmp> getArtistTmps() {
+        return artistTmps;
+    }
+
+    public void setArtistTmps(List<ArtistTmp> artistTmps) {
+        this.artistTmps = artistTmps;
+    }
+
+    public List<GenreTmp> getGenreTmps() {
+        return genreTmps;
+    }
+
+    public void setGenreTmps(List<GenreTmp> genreTmps) {
+        this.genreTmps = genreTmps;
+    }
 
     public Track() {
     }

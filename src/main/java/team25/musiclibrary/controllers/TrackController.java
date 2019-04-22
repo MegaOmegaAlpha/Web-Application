@@ -15,15 +15,9 @@ import team25.musiclibrary.service.DownloadService;
 import team25.musiclibrary.service.GenreService;
 import team25.musiclibrary.service.TrackService;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Time;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,21 +1,28 @@
 package team25.musiclibrary.entities;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "artist")
 @Table(name = "artist", schema = "music_store", catalog = "")
+@XStreamAlias("Artist")
 public class Artist{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @XStreamOmitField
     private int id;
     @Column(name = "name")
+    @XStreamAlias("name")
     private String name;
     @Column(name = "age")
+    @XStreamAlias("age")
     private int age;
 
     @ManyToMany(fetch = FetchType.LAZY,
