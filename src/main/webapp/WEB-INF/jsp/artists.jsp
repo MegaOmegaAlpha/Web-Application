@@ -31,6 +31,7 @@
             </div>
             <div class="col text-center">
                 <h1>Artists data</h1>
+                <a href="/downloadArtist?id=0" class="btn btn-outline-dark">Download</a>
             </div>
             <div class="col">
 
@@ -43,11 +44,11 @@
             <div class="col">
 
             </div>
-            <div class="col text-center">
+            <div class="col-text-center">
                 <form class="form-inline" action="/searchArtist">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="age" placeholder="Age" class="form-control mb-2 mr-sm-2"/>
-                    <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
+                    <button type="submit" class="btn btn-outline-dark mb-2 mr-sm-2">Search</button>
                 </form>
             </div>
             <div class="col">
@@ -64,7 +65,7 @@
                     <a href="/genres" class="btn btn-light mb-2">Genres</a>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col-7">
                 <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
@@ -80,7 +81,11 @@
                             <td><c:out value="${artist.name}"/></td>
                             <td><c:out value="${artist.age}"/></td>
                             <td><a href="/artistTracks?id=${artist.id}">Tracks' collection</a></td>
-                            <td><a class="btn btn-outline-warning mr-2" href="/updateArtist?id=${artist.id}">Edit</a><a href="/deleteArtist?id=${artist.id}" class="btn btn-outline-danger">Remove</a></td>
+                            <td>
+                                <a class="btn btn-outline-warning mr-2" href="/updateArtist?id=${artist.id}">Edit</a>
+                                <a href="/deleteArtist?id=${artist.id}" class="btn btn-outline-danger">Remove</a>
+                                <a class="btn btn-outline-success mr-2" href="/downloadArtist?id=${artist.id}">Download</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

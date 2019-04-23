@@ -31,7 +31,20 @@ public class Artist{
                     CascadeType.MERGE
             },
             mappedBy = "artists")
+    @XStreamOmitField
     private List<Track> tracks = new ArrayList<>();
+
+    @Transient
+    @XStreamAlias("Tracks")
+    List<TrackTmp> trackTmps;
+
+    public void setTrackTmps(List<TrackTmp> trackTmps) {
+        this.trackTmps = trackTmps;
+    }
+
+    public List<TrackTmp> getTrackTmps() {
+        return trackTmps;
+    }
 
     public Artist(String name, int age) {
         this.name = name;
@@ -67,5 +80,15 @@ public class Artist{
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void initToDownload(){
+        trackTmps = new ArrayList<>();
+        for (Track track : tracks) {
+            TrackTmp trackTmp = new TrackTmp();
+            trackTmp.setName(track.getName());
+            trackTmp.setAlbum(track.getAlbum());
+            trackTmps.add(trackTmp);
+        }
     }
 }

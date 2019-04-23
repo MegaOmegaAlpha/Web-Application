@@ -85,33 +85,6 @@ public class Track implements Serializable {
         this.duration = duration;
     }
 
-    /*public String getArtists() {
-        String artistsNames = "";
-        int artistsSize = artists.size();
-        for (int i = 0; i < artistsSize; ++i){
-            if (i == 1) {
-                artistsNames = artistsNames.concat(" feat. ");
-            }
-            artistsNames = artistsNames.concat(artists.get(i).getName());
-            if(i > 1 && i < artistsSize - 1){
-                artistsNames += ", ";
-            }
-        }
-        return artistsNames;
-    }
-
-    public String getGenres() {
-        String genresNames = "";
-        int genresSize = genres.size();
-        for (int i = 0; i < genresSize; ++i){
-            if(i > 0){
-                genresNames += ", ";
-            }
-            genresNames = genresNames.concat(genres.get(i).getName());
-        }
-        return genresNames;
-    }*/
-
     public List<Artist> getArtists() {
         return artists;
     }
@@ -160,4 +133,17 @@ public class Track implements Serializable {
         this.duration = duration;
     }
 
+    public void initToDownload(){
+        genreTmps = new ArrayList<>();
+        artistTmps = new ArrayList<>();
+        for (Artist artist : artists) {
+            ArtistTmp artistTmp = new ArtistTmp();
+            artistTmp.setName(artist.getName());
+            artistTmps.add(artistTmp);
+        }
+        for (Genre genre : genres) {
+            GenreTmp  genreTmp = new GenreTmp(genre.getName());
+            genreTmps.add(genreTmp);
+        }
+    }
 }

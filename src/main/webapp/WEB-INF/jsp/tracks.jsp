@@ -37,6 +37,7 @@
             </div>
             <div class="col text-center">
                 <h1>Tracks data</h1>
+                <a href="/downloadTrack?id=0" class="btn btn-outline-dark">Download</a>
             </div>
             <div class="col">
 
@@ -49,7 +50,7 @@
             <div class="col">
 
             </div>
-            <div class="col- text-center">
+            <div class="col-text-center">
                 <form class="form-inline" action="/searchTrack">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="album" placeholder="Album" class="form-control mb-2 mr-sm-2"/>

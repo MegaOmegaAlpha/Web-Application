@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import team25.musiclibrary.entities.Artist;
 import team25.musiclibrary.entities.Track;
 import team25.musiclibrary.service.ArtistService;
+import team25.musiclibrary.service.DownloadService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -79,5 +82,24 @@ public class ArtistController {
             model.addAttribute("listOfArtists", artistService.getAll());
         }
         return "jsp/artists";
+    }
+
+    @GetMapping("/downloadArtist")
+    public void downloadArtist(@RequestParam int id, HttpServletResponse response){
+        String fileName;
+        Object object;
+        StringBuilder stringBuilder = new StringBuilder();
+        if(id > 0){
+            object = artistService.getArtist(id);
+            Artist artist = (Artist) object;
+            stringBuilder.append(artist.getName()).append(" ").append(artist.getAge()).append(".xml");
+            artist.initToDownload();
+        }
+        else {
+            object = artistService.getAll();
+            stringBuilder.append("Artists.xml");
+        }
+        fileName = stringBuilder.toString();
+        DownloadService.download(object, response, fileName);
     }
 }

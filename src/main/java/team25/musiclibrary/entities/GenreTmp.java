@@ -12,6 +12,9 @@ public class GenreTmp {
         this.name = name;
     }
 
+    public GenreTmp(){
+
+    }
     public String getName() {
         return name;
     }

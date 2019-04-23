@@ -11,15 +11,19 @@ public class TrackTmp {
     private String name;
     @XStreamAlias("album")
     private String album;
-    @XStreamAlias("duration")
-    private Time duration;
 
-    public TrackTmp(String name, String album, Time duration) {
-        this.name = name;
-        this.album = album;
-        this.duration = duration;
+//    @XStreamAlias("duration")
+//    private Time duration;
+
+//    public TrackTmp(String name, String album, Time duration) {
+//        this.name = name;
+//        this.album = album;
+//        this.duration = duration;
+//    }
+
+    public TrackTmp(){
+
     }
-
     public String getName() {
         return name;
     }
@@ -35,12 +39,12 @@ public class TrackTmp {
     public void setAlbum(String album) {
         this.album = album;
     }
-
-    public Time getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Time duration) {
-        this.duration = duration;
-    }
+//
+//    public Time getDuration() {
+//        return duration;
+//    }
+//
+//    public void setDuration(Time duration) {
+//        this.duration = duration;
+//    }
 }

@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import team25.musiclibrary.entities.Artist;
 import team25.musiclibrary.entities.Genre;
+import team25.musiclibrary.service.DownloadService;
 import team25.musiclibrary.service.GenreService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -85,5 +88,22 @@ public class GenreController {
         }
         return "jsp/genres";
     }
-
+    @GetMapping("/downloadGenre")
+    public void downloadArtist(@RequestParam int id, HttpServletResponse response){
+        String fileName;
+        Object object;
+        StringBuilder stringBuilder = new StringBuilder();
+        if(id > 0){
+            object = genreService.getGenre(id);
+            Genre genre = (Genre) object;
+            stringBuilder.append(genre.getName()).append(" ").append(genre.getRating()).append(".xml");
+            genre.initToDownload();
+        }
+        else {
+            object = genreService.getAll();
+            stringBuilder.append("Genres.xml");
+        }
+        fileName = stringBuilder.toString();
+        DownloadService.download(object, response, fileName);
+    }
 }

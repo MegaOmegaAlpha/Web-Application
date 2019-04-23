@@ -1,17 +1,22 @@
 package team25.musiclibrary.entities;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "genre")
 @Table(name = "genre", schema = "music_store", catalog = "")
+@XStreamAlias("Genre")
 public class Genre{
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XStreamOmitField
     private int id;
     @Column(name = "name")
     private String name;
@@ -24,7 +29,16 @@ public class Genre{
                     CascadeType.MERGE
             },
             mappedBy = "genres")
+    @XStreamOmitField
     private List<Track> tracks = new ArrayList<>();
+
+    @Transient
+    @XStreamAlias("Tracks")
+    List<TrackTmp> trackTmps;
+
+    public List<TrackTmp> getTrackTmps() {
+        return trackTmps;
+    }
 
     public Genre(String name, int rating) {
         this.name = name;
@@ -34,17 +48,9 @@ public class Genre{
     public Genre() {
     }
 
-    /*public String getTracks() {
-        String tracksNames = "";
-        int tracksSize = tracks.size();
-        for (int i = 0 ; i < tracksSize; ++i){
-            if(i > 0){
-                tracksNames += ", ";
-            }
-            tracksNames = tracksNames.concat(tracks.get(i).getName());
-        }
-        return tracksNames;
-    }*/
+    public void setTrackTmps(List<TrackTmp> trackTmps) {
+        this.trackTmps = trackTmps;
+    }
 
     public List<Track> getTracks() {
         return tracks;
@@ -76,5 +82,15 @@ public class Genre{
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public void initToDownload(){
+        trackTmps = new ArrayList<>();
+        for (Track track : tracks) {
+            TrackTmp trackTmp = new TrackTmp();
+            trackTmp.setName(track.getName());
+            trackTmp.setAlbum(track.getAlbum());
+            trackTmps.add(trackTmp);
+        }
     }
 }

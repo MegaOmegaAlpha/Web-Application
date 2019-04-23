@@ -1,8 +1,6 @@
 package team25.musiclibrary.controllers;
 
 
-import com.sun.deploy.net.HttpResponse;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -158,25 +156,21 @@ public class TrackController {
 
     @GetMapping("/downloadTrack")
     public void downloadTrack(@RequestParam int id, HttpServletResponse response) {
-        Track track = trackService.getTrack(id);
-        String fileName = DownloadService.downloadTrack(track);
-        response.setContentType("text/plain");
-        response.setHeader("Content-Disposition",
-                "attachment;filename=" + fileName);
-        int read;
-        try (InputStream inputStream = new FileInputStream(new File(fileName));
-             OutputStream outputStream = response.getOutputStream()) {
-            byte[] bytes = new byte[1024];
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
-            outputStream.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String fileName;
+        Object object;
+        StringBuilder stringBuilder = new StringBuilder();
+        if(id > 0){
+            object = trackService.getTrack(id);
+            Track track = (Track) object;
+            stringBuilder.append(track.getName()).append(" ").append(track.getAlbum()).append(".xml");
+            track.initToDownload();
         }
-
+        else {
+            object = trackService.getAll();
+            stringBuilder.append("Tracks.xml");
+        }
+        fileName = stringBuilder.toString();
+        DownloadService.download(object, response, fileName);
     }
 }
 

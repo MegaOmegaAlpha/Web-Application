@@ -3,49 +3,46 @@ package team25.musiclibrary.service;
 import com.thoughtworks.xstream.XStream;
 import team25.musiclibrary.entities.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DownloadService {
 
-    public static String downloadTrack(Track track) {
-        List<Artist> artistList = track.getArtists();
-        List<Genre> genreList = track.getGenres();
-        List<GenreTmp> genreTmps = new ArrayList<>();
-        List<ArtistTmp> artistTmps = new ArrayList<>();
-        for (Artist artist : artistList) {
-            ArtistTmp artistTmp = new ArtistTmp();
-            artistTmp.setName(artist.getName());
-            artistTmps.add(artistTmp);
-        }
-        for (Genre genre : genreList) {
-            GenreTmp  genreTmp = new GenreTmp(genre.getName());
-            genreTmps.add(genreTmp);
-        }
-        track.setArtistTmps(artistTmps);
-        track.setGenreTmps(genreTmps);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(track.getName()).append(" ").append(track.getAlbum()).append(".xml");
-        File file = new File(stringBuilder.toString());
+    public static void download(Object object, HttpServletResponse response, String fileName) {
+        File file = new File(fileName);
         XStream stream = new XStream();
         stream.autodetectAnnotations(true);
         try {
-            stream.toXML(track, new FileWriter(file));
+            stream.toXML(object, new FileWriter(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return stringBuilder.toString();
+        response.setContentType("text/plain");
+        response.setHeader("Content-Disposition",
+                "attachment;filename=" + fileName);
+        int read;
+        try (InputStream inputStream = new FileInputStream(new File(fileName));
+             OutputStream outputStream = response.getOutputStream()) {
+            byte[] bytes = new byte[1024];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            outputStream.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String downloadArtist(Artist artist) {
-        return  null;
-    }
-
-    public static String downloadGenre(Genre genre) {
-        return null;
-    }
+//    public static String downloadArtist(Artist artist) {
+//        return  null;
+//    }
+//
+//    public static String downloadGenre(Genre genre) {
+//        return null;
+//    }
 
 }

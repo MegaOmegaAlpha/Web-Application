@@ -31,9 +31,9 @@
             </div>
             <div class="col text-center">
                 <h1>Genres data</h1>
+                <a href="/downloadGenre?id=0" class="btn btn-outline-dark">Download</a>
             </div>
             <div class="col">
-
             </div>
         </div>
     </div>
@@ -43,11 +43,11 @@
             <div class="col">
 
             </div>
-            <div class="col text-center">
+            <div class="col-text-center">
                 <form class="form-inline" action="/searchGenre">
                     <input type="text" name="name" placeholder="Name" class="form-control mb-2 mr-sm-2"/>
                     <input type="text" name="rating" placeholder="Rating" class="form-control mb-2 mr-sm-2"/>
-                    <button type="submit" class="btn btn-light mb-2 mr-sm-2">Search</button>
+                    <button type="submit" class="btn btn-outline-dark mb-2 mr-sm-2">Search</button>
                 </form>
             </div>
             <div class="col">
@@ -64,7 +64,7 @@
                     <a href="/tracks" class="btn btn-light mb-2">Tracks</a>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col-7">
                 <table class="table text-center">
                     <thead class="thead-light">
                     <tr>
@@ -83,6 +83,7 @@
                             <td>
                                 <a class="btn btn-outline-warning mr-2" href="/updateGenre/${genre.id}">Edit</a>
                                 <a class="btn btn-outline-danger" href="/deleteGenre?id=${genre.id}">Remove</a>
+                                <a class="btn btn-outline-success" href="/downloadGenre?id=${genre.id}">Download</a>
                             </td>
                         </tr>
                     </c:forEach>
