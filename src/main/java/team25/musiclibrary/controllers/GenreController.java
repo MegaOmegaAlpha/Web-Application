@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import team25.musiclibrary.entities.Artist;
 import team25.musiclibrary.entities.Genre;
 import team25.musiclibrary.service.DownloadService;
 import team25.musiclibrary.service.GenreService;
@@ -97,7 +96,6 @@ public class GenreController {
             object = genreService.getGenre(id);
             Genre genre = (Genre) object;
             stringBuilder.append(genre.getName()).append(" ").append(genre.getRating()).append(".xml");
-            genre.initToDownload();
         }
         else {
             object = genreService.getAll();

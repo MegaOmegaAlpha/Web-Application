@@ -5,12 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import team25.musiclibrary.entities.Artist;
-import team25.musiclibrary.entities.Track;
 import team25.musiclibrary.service.ArtistService;
 import team25.musiclibrary.service.DownloadService;
-
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 import java.util.List;
 
 @Controller

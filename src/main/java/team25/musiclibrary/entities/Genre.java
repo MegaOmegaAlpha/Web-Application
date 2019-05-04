@@ -32,24 +32,12 @@ public class Genre{
     @XStreamOmitField
     private List<Track> tracks = new ArrayList<>();
 
-    @Transient
-    @XStreamAlias("Tracks")
-    List<TrackTmp> trackTmps;
-
-    public List<TrackTmp> getTrackTmps() {
-        return trackTmps;
-    }
-
     public Genre(String name, int rating) {
         this.name = name;
         this.rating = rating;
     }
 
     public Genre() {
-    }
-
-    public void setTrackTmps(List<TrackTmp> trackTmps) {
-        this.trackTmps = trackTmps;
     }
 
     public List<Track> getTracks() {
@@ -84,13 +72,5 @@ public class Genre{
         this.rating = rating;
     }
 
-    public void initToDownload(){
-        trackTmps = new ArrayList<>();
-        for (Track track : tracks) {
-            TrackTmp trackTmp = new TrackTmp();
-            trackTmp.setName(track.getName());
-            trackTmp.setAlbum(track.getAlbum());
-            trackTmps.add(trackTmp);
-        }
-    }
+
 }

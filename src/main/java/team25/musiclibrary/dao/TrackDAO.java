@@ -3,12 +3,9 @@ package team25.musiclibrary.dao;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import team25.musiclibrary.entities.Track;
-
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -25,5 +22,5 @@ public interface TrackDAO extends CrudRepository<Track, Integer> {
             "WHERE g.rating = ?1", nativeQuery = true   )
     List<Track> findAllByGenres_RatingLike( Integer rating);
 
-    List<Track> findAllByNameOrAlbumOrDuration(String name, String album, Time duration);
+    List<Track> findAllByNameOrAlbumOrDuration(String name, String album, LocalTime duration);
 }

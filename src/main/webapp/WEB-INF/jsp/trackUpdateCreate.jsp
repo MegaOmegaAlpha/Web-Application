@@ -33,17 +33,14 @@
     <div class="container">
         <div class="row">
             <div class="col">
-
             </div>
             <div class="col text-center">
                 <h1>${operation} track</h1>
             </div>
             <div class="col">
-
             </div>
         </div>
         <div class="col">
-
         </div>
     </div>
     <hr>
@@ -70,7 +67,7 @@
                         </div>
                         <div class="form-group col">
                             <label for="trackDurationId">Duration</label>
-                            <input type="time" step="1" name="duration" id="trackDurationId" class="form-control" value="${track.duration}"/>
+                            <input type="time" step="1" min="00:00:00" max="99:99:99" name="duration" id="trackDurationId" class="form-control" value="${track.duration}"/>
                         </div>
                     </div>
                     <div class="form-row">

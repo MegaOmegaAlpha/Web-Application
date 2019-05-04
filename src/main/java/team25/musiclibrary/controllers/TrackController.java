@@ -14,8 +14,7 @@ import team25.musiclibrary.service.GenreService;
 import team25.musiclibrary.service.TrackService;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,6 @@ public class TrackController {
     @GetMapping(value = "/tracks", headers = "Accept=application/json")
     public String getTracks(Model model) {
         Iterable<Track> listOfTracks = trackService.getAll();
-        System.out.println(trackService.getTrack(1).getDuration());
         model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", listOfTracks);
         return "jsp/tracks";
@@ -49,7 +47,7 @@ public class TrackController {
     public String addTrack(@RequestParam String name, @RequestParam String album,
                            @RequestParam String duration, @RequestParam List<String> artistIdList,
                            @RequestParam List<String> genreIdList){
-        Track track = new Track(name, album, Time.valueOf(duration));
+        Track track = new Track(name, album, LocalTime.parse(duration));
         for (String id : artistIdList) {
             track.getArtists().add(artistService.getArtist(Integer.parseInt(id)));
         }
@@ -69,11 +67,6 @@ public class TrackController {
         return "jsp/trackUpdateCreate";
     }
 
-    /*@RequestMapping(value = "/addTrack", method = RequestMethod.GET, headers = "Accept=application/json")
-    public String addTrack(@ModelAttribute("track") Track track) {
-        trackService.addTrack(track);
-        return "redirect:/getAllTracks";
-    }*/
 
     @GetMapping(value = "/updateTrack/{id}", headers = "Accept=application/json")
     public String updateTrack(@PathVariable("id") int id, Model model) {
@@ -91,7 +84,7 @@ public class TrackController {
         Track track = trackService.getTrack(id);
         track.setName(name);
         track.setAlbum(album);
-        track.setDuration(Time.valueOf(duration));
+        track.setDuration(LocalTime.parse(duration));
         List<Artist> artistList = new ArrayList<>();
         for (String artistId : artistIdList) {
             artistList.add(artistService.getArtist(Integer.parseInt(artistId)));
@@ -114,13 +107,11 @@ public class TrackController {
 
     @GetMapping(value = "/findByArtistAge", headers = "Accept=application/json")
     public String findByArtistAge(@RequestParam int ageMin, @RequestParam int ageMax,  Model model){
-        //model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", trackService.findAllByArtists_AgeBetween(ageMin, ageMax));
         return "jsp/hardQueryPage1";
     }
     @GetMapping(value = "/findAllByGenres_RatingLike", headers = "Accept=application/json")
     public String findAllByGenres_RatingLike(@RequestParam Integer rating, Model model){
-        //model.addAttribute("track", new Track());
         model.addAttribute("listOfTracks", trackService.findAllByGenres_RatingLike(rating));
         return "jsp/hardQueryPage2";
     }
@@ -145,7 +136,7 @@ public class TrackController {
     public String searchTrack(@RequestParam String name, @RequestParam String album,
                             @RequestParam String duration, Model model) {
         if (!name.equals("") || !album.equals("") || !duration.equals("")) {
-            List<Track> tracks = trackService.findByParameters(name, album, Time.valueOf(duration.equals("") ?
+            List<Track> tracks = trackService.findByParameters(name, album, LocalTime.parse(duration.equals("") ?
                     "00:00:00" : duration));
             model.addAttribute("listOfTracks", tracks);
         } else {

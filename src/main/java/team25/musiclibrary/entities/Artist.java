@@ -84,10 +84,10 @@ public class Artist{
 
     public void initToDownload(){
         trackTmps = new ArrayList<>();
-        for (Track track : tracks) {
+        for (int i = 0; i < 10 && i < tracks.size(); i++) {
             TrackTmp trackTmp = new TrackTmp();
-            trackTmp.setName(track.getName());
-            trackTmp.setAlbum(track.getAlbum());
+            trackTmp.setName(tracks.get(i).getName());
+            trackTmp.setAlbum(tracks.get(i).getAlbum());
             trackTmps.add(trackTmp);
         }
     }

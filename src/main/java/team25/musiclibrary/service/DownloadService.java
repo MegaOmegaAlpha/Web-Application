@@ -1,12 +1,8 @@
 package team25.musiclibrary.service;
 
 import com.thoughtworks.xstream.XStream;
-import team25.musiclibrary.entities.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DownloadService {
 
@@ -37,12 +33,5 @@ public class DownloadService {
         }
     }
 
-//    public static String downloadArtist(Artist artist) {
-//        return  null;
-//    }
-//
-//    public static String downloadGenre(Genre genre) {
-//        return null;
-//    }
 
 }

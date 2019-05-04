@@ -6,7 +6,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Track implements Serializable {
     private String album;
     @Column(name = "duration")
     @XStreamAlias("duration")
-    private Time duration;
+    private LocalTime duration;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -79,7 +80,7 @@ public class Track implements Serializable {
     public Track() {
     }
 
-    public Track(String name, String album, Time duration) {
+    public Track(String name, String album, LocalTime duration) {
         this.name = name;
         this.album = album;
         this.duration = duration;
@@ -125,11 +126,16 @@ public class Track implements Serializable {
         this.album = album;
     }
 
-    public Time getDuration() {
-        return duration;
+    public String getDuration() {
+        if (duration != null){
+            return duration.format(DateTimeFormatter.ISO_LOCAL_TIME);
+        }
+        else {
+            return "";
+        }
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(LocalTime duration) {
         this.duration = duration;
     }
 
